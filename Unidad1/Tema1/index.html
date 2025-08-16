@@ -9,19 +9,23 @@
 </head>
 <body class="bg-gray-100 flex">
 
-  <!-- Sidebar -->
-  <aside class="w-64 bg-white shadow-md p-4 hidden md:block">
-    <nav>
-      <ul class="space-y-2">
-        <li><a href="#" class="sidebar-link active" data-page="inicio.html">🏠 Inicio</a></li>
-        <li><a href="#" class="sidebar-link" data-page="introduccion.html">📖 Introducción</a></li>
-        <li><a href="#" class="sidebar-link" data-page="contenido.html">📚 Contenido</a></li>
-        <li><a href="#" class="sidebar-link" data-page="actividades.html">📝 Actividades</a></li>
-        <li><a href="#" class="sidebar-link" data-page="evaluacion.html">✅ Evaluación</a></li>
-        <li><a href="#" class="sidebar-link" data-page="bibliografia.html">📂 Bibliografía</a></li>
-      </ul>
+
+
+    <aside class="w-64 bg-white shadow-lg flex-shrink-0 hidden md:flex md:flex-col">
+    <div class="flex flex-col items-center justify-center mb-6">
+        <img src="img/logoCINTIA.png" alt="" class="w-32 h-auto mb-4 rounded-md">
+    </div>
+    <nav class="mt-6 flex-1">
+        <a href="#" class="sidebar-link active flex items-center py-3 px-6 font-medium text-slate-700" data-page="introduccion.html"><span class="mr-3 text-xl">🚀</span> Introducción</a>
+        <a href="#" class="sidebar-link flex items-center py-3 px-6 font-medium text-slate-700" data-target="objetivos"><span class="mr-3 text-xl">🎯</span> Objetivos</a>
+        <a href="#" class="sidebar-link flex items-center py-3 px-6 font-medium text-slate-700" data-target="fundamentos"><span class="mr-3 text-xl">📚</span> Contenido</a>
+        <a href="#" class="sidebar-link flex items-center py-3 px-6 font-medium text-slate-700" data-target="tipos"><span class="mr-3 text-xl">🛠️</span> Herramientas digitales</a>
+        
+        <a href="#" class="sidebar-link flex items-center py-3 px-6 font-medium text-slate-700" data-target="actividades"><span class="mr-3 text-xl">✍️</span> Actividades</a>
+        <a href="#" class="sidebar-link flex items-center py-3 px-6 font-medium text-slate-700" data-target="evaluacion"><span class="mr-3 text-xl">✔️</span> Evaluación</a>
+        <a href="#" class="sidebar-link flex items-center py-3 px-6 font-medium text-slate-700" data-target="lecturas"><span class="mr-3 text-xl">📖</span> Lecturas</a>
     </nav>
-  </aside>
+</aside>
 
   <!-- Contenido dinámico -->
   <main id="content-area" class="flex-1 p-6">
