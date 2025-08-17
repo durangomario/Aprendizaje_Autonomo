@@ -1,11 +1,12 @@
 // --- Función para cargar contenido ---
 async function loadContent(page) {
-    console.log(page)
+    const contentArea = document.getElementById("content-area");
     if (page == "Contenido.html"){
         const contenido = document.getElementById("contenido");
         contenido.style.display = "block";
-    }else{
-        const contentArea = document.getElementById("content-area");
+        contentArea.style.display = "none";
+    }else{        
+        contentArea.style.display = "block";
         try {
             const response = await fetch(`contenidos/${page}`);
             if (!response.ok) throw new Error("Error al cargar " + page);
