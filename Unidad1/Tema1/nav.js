@@ -7,6 +7,7 @@ async function loadContent(page) {
         contentArea.style.display = "none";
     }else{        
         contentArea.style.display = "block";
+        contenido.style.display = "none";
         try {
             const response = await fetch(`contenidos/${page}`);
             if (!response.ok) throw new Error("Error al cargar " + page);
