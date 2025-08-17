@@ -1,14 +1,18 @@
 // --- Función para cargar contenido ---
 async function loadContent(page) {
     console.log(page);
-    const contentArea = document.getElementById("content-area");
-    try {
-        const response = await fetch(`contenidos/${page}`);
-        if (!response.ok) throw new Error("Error al cargar " + page);
-        const html = await response.text();
-        contentArea.innerHTML = html;
-    } catch (error) {
-        contentArea.innerHTML = `<p class="text-red-500">${error.message}</p>`;
+    if (page =="Contenido.html"){
+        alert(page);
+    }else{
+        const contentArea = document.getElementById("content-area");
+        try {
+            const response = await fetch(`contenidos/${page}`);
+            if (!response.ok) throw new Error("Error al cargar " + page);
+            const html = await response.text();
+            contentArea.innerHTML = html;
+        } catch (error) {
+            contentArea.innerHTML = `<p class="text-red-500">${error.message}</p>`;
+        }
     }
 }
 
