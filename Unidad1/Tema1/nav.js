@@ -2,7 +2,8 @@
 async function loadContent(page) {
     console.log(page)
     if (page == "Contenido.html"){
-        alert(0)
+        const contenido = document.getElementById("contenido");
+        contenido.style.display = "block";
     }else{
         const contentArea = document.getElementById("content-area");
         try {
