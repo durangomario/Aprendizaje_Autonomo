@@ -1,4 +1,3 @@
-Dijiste:
 // --- Función para cargar contenido ---
 async function loadContent(page) {
     const contentArea = document.getElementById("content-area");
