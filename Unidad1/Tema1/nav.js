@@ -1,5 +1,6 @@
 // --- Función para cargar contenido ---
 async function loadContent(page) {
+    console.log(page);
     const contentArea = document.getElementById("content-area");
     try {
         const response = await fetch(`contenidos/${page}`);
