@@ -3,212 +3,180 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Examen: Aprendizaje Autónomo (10 preguntas)</title>
+<title>Examen: Metacognición y Autorregulación (10 preguntas)</title>
 <style>
   :root{
-    --bg:#f3f4f6;        /* gris claro */
-    --card:#ffffff;      /* blanco */
-    --ink:#1f2937;       /* gris oscuro */
-    --muted:#4b5563;     /* gris medio */
-    --brand:#16a34a;     /* verde */
-    --accent:#2563eb;    /* azul */
-    --bad:#dc2626;       /* rojo */
-    --good:#059669;      /* verde fuerte */
-    --warn:#d97706;      /* naranja */
+    --bg:#f3f4f6; --card:#ffffff; --ink:#1f2937; --muted:#4b5563;
+    --accent:#2563eb; --bad:#dc2626; --good:#059669; --warn:#d97706;
   }
-  *{box-sizing:border-box}
-  body{
-    margin:0; background:var(--bg);
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial;
-    color:var(--ink);
-  }
+  body{margin:0; background:var(--bg); font-family:system-ui; color:var(--ink);}
   .wrap{max-width:920px; margin:24px auto; padding:24px;}
-  .hero{
-    background:var(--card);
-    border:1px solid #e5e7eb;
-    padding:24px; border-radius:16px; box-shadow: 0 6px 20px rgba(0,0,0,.05);
-  }
-  h1{margin:0 0 6px; font-size:clamp(22px, 3vw, 28px)}
+  .hero{background:var(--card); border:1px solid #e5e7eb; padding:24px;
+    border-radius:16px; box-shadow:0 6px 20px rgba(0,0,0,.05);}
+  h1{margin:0 0 6px; font-size:clamp(22px,3vw,28px);}
   .sub{color:var(--muted); margin:0 0 12px; font-size:14px}
-  .badge{
-    display:inline-block; background:var(--accent); color:white;
-    padding:4px 10px; border-radius:999px; font-size:12px; letter-spacing:.3px;
-  }
+  .badge{display:inline-block; background:var(--accent); color:white;
+    padding:4px 10px; border-radius:999px; font-size:12px;}
   .quiz{margin-top:16px; display:grid; gap:16px;}
-  .q{
-    background:#f9fafb;
-    border:1px solid #e5e7eb;
-    border-radius:14px; padding:18px;
-  }
-  .q h3{margin:0 0 10px; font-size:18px; line-height:1.3;}
+  .q{background:#f9fafb; border:1px solid #e5e7eb; border-radius:14px; padding:18px;}
+  .q h3{margin:0 0 10px; font-size:18px;}
   .opts{display:grid; gap:8px; margin-top:6px}
-  .opt{
-    display:flex; gap:10px; align-items:flex-start; padding:10px 12px; border-radius:10px;
-    border:1px solid #e5e7eb; background:white; cursor:pointer;
-    transition:transform .05s ease, border-color .2s ease, background .2s ease;
-  }
-  .opt:hover{transform:translateY(-1px); border-color:var(--accent); background:#eff6ff}
-  .opt input{margin-top:2px}
-  .feedback{
-    display:none; margin-top:10px; font-size:14px; line-height:1.4; padding:10px 12px; border-radius:10px;
-  }
+  .opt{display:flex; gap:10px; align-items:flex-start; padding:10px 12px;
+    border-radius:10px; border:1px solid #e5e7eb; background:white; cursor:pointer;}
+  .opt:hover{border-color:var(--accent); background:#eff6ff}
+  .feedback{display:none; margin-top:10px; font-size:14px; line-height:1.4; padding:10px 12px; border-radius:10px;}
   .feedback.ok{background:#dcfce7; border:1px solid #86efac; color:var(--good)}
   .feedback.bad{background:#fee2e2; border:1px solid #fca5a5; color:var(--bad)}
   .actions{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap;}
-  button{
-    appearance:none; border:none; cursor:pointer; padding:12px 16px; border-radius:12px; font-weight:600;
-    background:var(--accent); color:white; box-shadow: 0 6px 18px rgba(37,99,235,.3);
-  }
-  button.secondary{
-    background:#f3f4f6; color:var(--ink); border:1px solid #d1d5db; box-shadow:none;
-  }
+  button{appearance:none; border:none; cursor:pointer; padding:12px 16px;
+    border-radius:12px; font-weight:600; background:var(--accent); color:white;}
+  button.secondary{background:#f3f4f6; color:var(--ink); border:1px solid #d1d5db;}
   .score{margin-top:14px; font-weight:700; font-size:16px;}
   .legend{margin-top:6px; color:var(--muted); font-size:13px;}
   .required{color:var(--warn); font-weight:600}
-  .mark{
-    display:inline-block; margin-left:8px; padding:2px 8px; border-radius:999px; font-size:12px; font-weight:700;
-  }
+  .mark{display:inline-block; margin-left:8px; padding:2px 8px; border-radius:999px; font-size:12px; font-weight:700;}
   .mark.ok{background:#dcfce7; color:var(--good)}
   .mark.bad{background:#fee2e2; color:var(--bad)}
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="hero">
-      <span class="badge">Evaluación</span>
-      <h1>Examen de Aprendizaje Autónomo</h1>
-      <p class="sub">Selecciona una opción por pregunta. Al calificar, verás retroalimentación con una breve explicación.</p>
+<div class="wrap">
+  <div class="hero">
+    <span class="badge">Evaluación</span>
+    <h1>Examen: Metacognición y Autorregulación</h1>
+    <p class="sub">Selecciona una opción por pregunta. Al calificar, verás retroalimentación con una breve explicación.</p>
 
-      <form id="quiz" class="quiz">
-        <!-- P1 -->
-        <div class="q" data-correct="b" data-explain="El aprendizaje autónomo implica que la persona asume la responsabilidad de diagnosticar sus necesidades, fijar objetivos, elegir estrategias y evaluar resultados.">
-          <h3>1) ¿Cuál opción describe mejor el Aprendizaje Autónomo?</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q1" value="a"> Un método donde el docente decide todos los contenidos, tiempos y evaluaciones.</label>
-            <label class="opt"><input type="radio" name="q1" value="b"> Un proceso en el que la persona asume la responsabilidad de su propio aprendizaje, desde el diagnóstico hasta la evaluación.</label>
-            <label class="opt"><input type="radio" name="q1" value="c"> Un conjunto de tareas estandarizadas que se repiten de forma mecánica.</label>
-            <label class="opt"><input type="radio" name="q1" value="d"> Un curso en línea sin necesidad de planificación personal.</label>
-          </div>
-          <div class="feedback"></div>
-        </div>
+    <form id="quiz" class="quiz">
 
-        <!-- P2 -->
-        <div class="q" data-correct="c" data-explain="Según Malcolm Knowles, los adultos tienen una necesidad natural de ser autodirigidos y aprenden mejor cuando participan activamente en su proceso.">
-          <h3>2) De acuerdo con Malcolm Knowles, los estudiantes adultos…</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q2" value="a"> Aprenden mejor cuando reciben instrucciones detalladas y estrictas.</label>
-            <label class="opt"><input type="radio" name="q2" value="b"> Dependen por completo de la evaluación externa para progresar.</label>
-            <label class="opt"><input type="radio" name="q2" value="c"> Tienen una necesidad natural de ser autodirigidos y participar activamente en su aprendizaje.</label>
-            <label class="opt"><input type="radio" name="q2" value="d"> Requieren clases magistrales para mantener la motivación.</label>
-          </div>
-          <div class="feedback"></div>
+      <!-- P1 -->
+      <div class="q" data-correct="b" data-explain="La metacognición es la capacidad de reflexionar sobre los propios procesos de pensamiento y aprendizaje.">
+        <h3>1) ¿Qué es la metacognición?</h3>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="q1" value="a"> Memorizar información sin analizarla.</label>
+          <label class="opt"><input type="radio" name="q1" value="b"> Reflexionar sobre los propios procesos de pensamiento y aprendizaje.</label>
+          <label class="opt"><input type="radio" name="q1" value="c"> Repetir tareas mecánicamente.</label>
+          <label class="opt"><input type="radio" name="q1" value="d"> Aprender únicamente por instrucciones externas.</label>
         </div>
+        <div class="feedback"></div>
+      </div>
 
-        <!-- P3 -->
-        <div class="q" data-correct="a" data-explain="La autogestión implica organizar tiempo, espacio y recursos para cumplir metas de aprendizaje.">
-          <h3>3) ¿Qué enunciado refleja <em>autogestión</em> en el aprendizaje?</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q3" value="a"> El estudiante planifica su agenda de estudio y selecciona recursos pertinentes.</label>
-            <label class="opt"><input type="radio" name="q3" value="b"> El docente asigna horarios y materiales obligatorios para todos.</label>
-            <label class="opt"><input type="radio" name="q3" value="c"> Se estudia solo cuando hay evaluaciones próximas.</label>
-            <label class="opt"><input type="radio" name="q3" value="d"> Se evita modificar la planificación inicial aunque no funcione.</label>
-          </div>
-          <div class="feedback"></div>
+      <!-- P2 -->
+      <div class="q" data-correct="a" data-explain="El conocimiento declarativo es la conciencia de las propias habilidades cognitivas, fortalezas y debilidades.">
+        <h3>2) ¿Cuál es un ejemplo de conocimiento declarativo?</h3>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="q2" value="a"> Reconocer las propias fortalezas y debilidades cognitivas.</label>
+          <label class="opt"><input type="radio" name="q2" value="b"> Saber cómo ejecutar una estrategia específica.</label>
+          <label class="opt"><input type="radio" name="q2" value="c"> Identificar cuándo aplicar una estrategia determinada.</label>
+          <label class="opt"><input type="radio" name="q2" value="d"> Memorizar fórmulas sin analizarlas.</label>
         </div>
+        <div class="feedback"></div>
+      </div>
 
-        <!-- P4 -->
-        <div class="q" data-correct="d" data-explain="No es una característica del aprendizaje autónomo depender totalmente del docente; la responsabilidad recae principalmente en el aprendiz.">
-          <h3>4) ¿Cuál de las siguientes <strong>NO</strong> es una característica del Aprendizaje Autónomo?</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q4" value="a"> Motivación intrínseca.</label>
-            <label class="opt"><input type="radio" name="q4" value="b"> Autorreflexión periódica.</label>
-            <label class="opt"><input type="radio" name="q4" value="c"> Flexibilidad ante contextos y herramientas.</label>
-            <label class="opt"><input type="radio" name="q4" value="d"> Dependencia total del docente para tomar decisiones.</label>
-          </div>
-          <div class="feedback"></div>
+      <!-- P3 -->
+      <div class="q" data-correct="b" data-explain="El conocimiento procedimental implica saber cómo llevar a cabo diferentes estrategias cognitivas.">
+        <h3>3) El conocimiento procedimental se refiere a…</h3>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="q3" value="a"> Saber cuándo aplicar estrategias.</label>
+          <label class="opt"><input type="radio" name="q3" value="b"> Saber cómo ejecutar estrategias cognitivas para realizar tareas.</label>
+          <label class="opt"><input type="radio" name="q3" value="c"> Reflexionar sobre resultados de aprendizaje.</label>
+          <label class="opt"><input type="radio" name="q3" value="d"> Establecer metas académicas claras.</label>
         </div>
+        <div class="feedback"></div>
+      </div>
 
-        <!-- P5 -->
-        <div class="q" data-correct="b" data-explain="La formulación de objetivos define metas claras, específicas y medibles que orientan el proceso.">
-          <h3>5) ¿En qué fase se establecen metas claras, específicas y medibles?</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q5" value="a"> Diagnóstico de necesidades.</label>
-            <label class="opt"><input type="radio" name="q5" value="b"> Formulación de objetivos.</label>
-            <label class="opt"><input type="radio" name="q5" value="c"> Ejecución.</label>
-            <label class="opt"><input type="radio" name="q5" value="d"> Evaluación.</label>
-          </div>
-          <div class="feedback"></div>
+      <!-- P4 -->
+      <div class="q" data-correct="c" data-explain="El conocimiento condicional es saber cuándo y por qué aplicar una estrategia según la situación.">
+        <h3>4) ¿Qué caracteriza al conocimiento condicional?</h3>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="q4" value="a"> Saber únicamente cómo aplicar una estrategia.</label>
+          <label class="opt"><input type="radio" name="q4" value="b"> Conocer fortalezas y debilidades personales.</label>
+          <label class="opt"><input type="radio" name="q4" value="c"> Saber cuándo y por qué usar una estrategia específica.</label>
+          <label class="opt"><input type="radio" name="q4" value="d"> Memorizar reglas sin contexto.</label>
         </div>
+        <div class="feedback"></div>
+      </div>
 
-        <!-- P6 -->
-        <div class="q" data-correct="c" data-explain="La metacognición es pensar sobre cómo se aprende: reconocer fortalezas y debilidades para ajustar estrategias.">
-          <h3>6) ¿Qué describe mejor la <em>metacognición</em>?</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q6" value="a"> Memorizar gran cantidad de información.</label>
-            <label class="opt"><input type="radio" name="q6" value="b"> Usar exclusivamente videos como recurso.</label>
-            <label class="opt"><input type="radio" name="q6" value="c"> Reflexionar sobre el propio proceso de aprendizaje para mejorarlo.</label>
-            <label class="opt"><input type="radio" name="q6" value="d"> Resolver ejercicios sin revisar errores.</label>
-          </div>
-          <div class="feedback"></div>
+      <!-- P5 -->
+      <div class="q" data-correct="a" data-explain="La autorregulación es la habilidad de dirigir, gestionar y evaluar conscientemente el propio proceso de aprendizaje.">
+        <h3>5) ¿Qué describe la autorregulación del aprendizaje?</h3>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="q5" value="a"> Dirigir, gestionar y evaluar conscientemente el propio aprendizaje.</label>
+          <label class="opt"><input type="radio" name="q5" value="b"> Repetir contenidos de memoria.</label>
+          <label class="opt"><input type="radio" name="q5" value="c"> Seguir instrucciones sin reflexión crítica.</label>
+          <label class="opt"><input type="radio" name="q5" value="d"> Evitar el monitoreo del proceso.</label>
         </div>
+        <div class="feedback"></div>
+      </div>
 
-        <!-- P7 -->
-        <div class="q" data-correct="a" data-explain="El rol del estudiante en este enfoque es protagónico: toma decisiones, pregunta, indaga y aplica el conocimiento.">
-          <h3>7) ¿Cuál acción representa el rol del estudiante en el Aprendizaje Autónomo?</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q7" value="a"> Tomar decisiones informadas sobre su proceso y buscar respuestas de manera crítica.</label>
-            <label class="opt"><input type="radio" name="q7" value="b"> Esperar instrucciones para cada actividad.</label>
-            <label class="opt"><input type="radio" name="q7" value="c"> Limitarse a recibir contenidos sin intervenir.</label>
-            <label class="opt"><input type="radio" name="q7" value="d"> Evitar comunidades de aprendizaje para concentrarse solo.</label>
-          </div>
-          <div class="feedback"></div>
+      <!-- P6 -->
+      <div class="q" data-correct="b" data-explain="La fase de planificación implica establecer objetivos claros, seleccionar estrategias y organizar recursos.">
+        <h3>6) ¿Qué ocurre en la fase de planificación de la autorregulación?</h3>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="q6" value="a"> Implementar directamente estrategias sin preparación.</label>
+          <label class="opt"><input type="radio" name="q6" value="b"> Establecer objetivos, elegir estrategias y organizar recursos.</label>
+          <label class="opt"><input type="radio" name="q6" value="c"> Evaluar los resultados finales del aprendizaje.</label>
+          <label class="opt"><input type="radio" name="q6" value="d"> Ignorar el tiempo disponible para estudiar.</label>
         </div>
+        <div class="feedback"></div>
+      </div>
 
-        <!-- P8 -->
-        <div class="q" data-correct="d" data-explain="El docente actúa como facilitador: provee recursos, fomenta pensamiento crítico y retroalimenta el proceso.">
-          <h3>8) ¿Qué función corresponde al docente como facilitador?</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q8" value="a"> Imponer el mismo ritmo a todos sin excepciones.</label>
-            <label class="opt"><input type="radio" name="q8" value="b"> Resolver todas las actividades por el estudiante.</label>
-            <label class="opt"><input type="radio" name="q8" value="c"> Calificar únicamente con pruebas objetivas.</label>
-            <label class="opt"><input type="radio" name="q8" value="d"> Orientar con recursos adecuados y brindar retroalimentación.</label>
-          </div>
-          <div class="feedback"></div>
+      <!-- P7 -->
+      <div class="q" data-correct="c" data-explain="La fase de ejecución implica implementar estrategias, monitorear el progreso y hacer ajustes en tiempo real.">
+        <h3>7) En la fase de ejecución o desempeño, el estudiante…</h3>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="q7" value="a"> Solo fija metas futuras.</label>
+          <label class="opt"><input type="radio" name="q7" value="b"> Ignora errores y sigue el plan original.</label>
+          <label class="opt"><input type="radio" name="q7" value="c"> Implementa estrategias, monitorea su desempeño y ajusta en tiempo real.</label>
+          <label class="opt"><input type="radio" name="q7" value="d"> Se concentra únicamente en la memoria mecánica.</label>
         </div>
+        <div class="feedback"></div>
+      </div>
 
-        <!-- P9 -->
-        <div class="q" data-correct="b" data-explain="Un beneficio clave es el desarrollo de habilidades transferibles como autorregulación, planificación y autodisciplina.">
-          <h3>9) ¿Cuál es un beneficio directo del Aprendizaje Autónomo?</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q9" value="a"> Disminución de la reflexión sobre el proceso.</label>
-            <label class="opt"><input type="radio" name="q9" value="b"> Desarrollo de habilidades transferibles (autorregulación, planificación, etc.).</label>
-            <label class="opt"><input type="radio" name="q9" value="c"> Eliminación de la necesidad de evaluar resultados.</label>
-            <label class="opt"><input type="radio" name="q9" value="d"> Sustituir todo aprendizaje colaborativo.</label>
-          </div>
-          <div class="feedback"></div>
+      <!-- P8 -->
+      <div class="q" data-correct="d" data-explain="La fase de autorreflexión implica evaluar resultados, identificar dificultades y planear mejoras.">
+        <h3>8) ¿Qué acción corresponde a la fase de autorreflexión?</h3>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="q8" value="a"> Organizar recursos antes de estudiar.</label>
+          <label class="opt"><input type="radio" name="q8" value="b"> Implementar las estrategias planificadas.</label>
+          <label class="opt"><input type="radio" name="q8" value="c"> Memorizar información sin revisión.</label>
+          <label class="opt"><input type="radio" name="q8" value="d"> Evaluar resultados, reconocer dificultades y planificar mejoras.</label>
         </div>
+        <div class="feedback"></div>
+      </div>
 
-        <!-- P10 -->
-        <div class="q" data-correct="c" data-explain="En programación web, practicar con proyectos personales consolida y actualiza competencias en un entorno de cambio constante.">
-          <h3>10) ¿Qué práctica ejemplifica Aprendizaje Autónomo en programación web?</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q10" value="a"> Esperar a que el docente actualice el temario cada año.</label>
-            <label class="opt"><input type="radio" name="q10" value="b"> Memorizar listados de funciones sin usarlas.</label>
-            <label class="opt"><input type="radio" name="q10" value="c"> Desarrollar proyectos personales para aplicar nuevas tecnologías y documentación oficial.</label>
-            <label class="opt"><input type="radio" name="q10" value="d"> Evitar comunidades como GitHub para no distraerse.</label>
-          </div>
-          <div class="feedback"></div>
+      <!-- P9 -->
+      <div class="q" data-correct="a" data-explain="La autoevaluación y reflexión constante son estrategias clave para fomentar la metacognición.">
+        <h3>9) ¿Qué estrategia fomenta la metacognición?</h3>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="q9" value="a"> Realizar autoevaluaciones y reflexionar sobre el propio desempeño.</label>
+          <label class="opt"><input type="radio" name="q9" value="b"> Evitar la reflexión crítica.</label>
+          <label class="opt"><input type="radio" name="q9" value="c"> Memorizar sin cuestionar el proceso.</label>
+          <label class="opt"><input type="radio" name="q9" value="d"> Repetir actividades sin análisis.</label>
         </div>
+        <div class="feedback"></div>
+      </div>
 
-        <div class="actions">
-          <button type="button" id="grade">Calificar</button>
-          <button type="button" class="secondary" id="reset">Reiniciar</button>
-          <span id="score" class="score muted"></span>
+      <!-- P10 -->
+      <div class="q" data-correct="c" data-explain="En la programación web, desarrollar proyectos personales ayuda a aplicar nuevas tecnologías y autorregular el aprendizaje.">
+        <h3>10) ¿Qué práctica ejemplifica la aplicación de metacognición y autorregulación en programación web?</h3>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="q10" value="a"> Esperar que el docente enseñe todas las actualizaciones tecnológicas.</label>
+          <label class="opt"><input type="radio" name="q10" value="b"> Memorizar listados de códigos sin aplicarlos.</label>
+          <label class="opt"><input type="radio" name="q10" value="c"> Desarrollar proyectos personales usando nuevas tecnologías y documentaciones.</label>
+          <label class="opt"><input type="radio" name="q10" value="d"> Evitar la práctica autónoma para no equivocarse.</label>
         </div>
-        <div class="legend">⚠️ <span class="required">Si alguna pregunta no tiene respuesta seleccionada, contará como incorrecta.</span></div>
-      </form>
-    </div>
+        <div class="feedback"></div>
+      </div>
+
+      <div class="actions">
+        <button type="button" id="grade">Calificar</button>
+        <button type="button" class="secondary" id="reset">Reiniciar</button>
+        <span id="score" class="score muted"></span>
+      </div>
+      <div class="legend">⚠️ <span class="required">Si alguna pregunta no tiene respuesta seleccionada, contará como incorrecta.</span></div>
+    </form>
   </div>
+</div>
 
 <script>
 (function(){
@@ -227,11 +195,8 @@
       const correctVal = q.getAttribute('data-correct');
       const explain = q.getAttribute('data-explain') || '';
 
-      // Clear previous classes
       fb.classList.remove('ok','bad');
       fb.style.display = 'block';
-
-      // Remove any existing mark
       const oldMark = q.querySelector('.mark');
       if(oldMark){ oldMark.remove(); }
 
@@ -239,7 +204,6 @@
         correct++;
         fb.classList.add('ok');
         fb.textContent = '✅ ¡Correcto! ' + explain;
-        // add mark chip
         const chip = document.createElement('span');
         chip.className = 'mark ok';
         chip.textContent = '✓';
@@ -269,15 +233,6 @@
 
   gradeBtn.addEventListener('click', grade);
   resetBtn.addEventListener('click', resetQuiz);
-
-  // Facilitar clic en toda la tarjeta de opción
-  quiz.querySelectorAll('.opt').forEach(label=>{
-    label.addEventListener('click', (e)=>{
-      const input = label.querySelector('input[type="radio"]');
-      // Permitir que el click nativo seleccione el radio, sin doble toggle
-      // (no se necesita lógica extra; este listener es solo para UX hovers)
-    });
-  });
 })();
 </script>
 </body>
