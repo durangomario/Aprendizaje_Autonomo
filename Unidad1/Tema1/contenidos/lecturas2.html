@@ -34,13 +34,7 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .quiz-option:hover {
-            background-color: #f0fdf4; /* green-50 */
-        }
-        .quiz-option.selected {
-            background-color: #dcfce7; /* green-100 */
-            border-color: #22c55e; /* green-500 */
-        }
+
         .type-card {
             transition: transform 0.3s, box-shadow 0.3s;
         }
@@ -88,36 +82,7 @@
             }
         }
         
-        .image-container:hover .expand-btn {
-            opacity: 1;
-            transform: scale(1.1);
-        }
-        
 
-
-        
-        /* Optimizaciones para dispositivos móviles */
-        @media (max-width: 768px) {
-            .modal-content {
-                max-width: 90%;
-                animation: slideUpFade 0.3s ease-out;
-                margin-right: 15px; /* Dar más espacio para el botón de cierre */
-            }
-            
-            .modal-content img {
-                border-width: 2px;
-            }
-            
-            .close-modal {
-                top: 10px;
-                right: 10px;
-                width: 36px;
-                height: 36px;
-                position: absolute;
-                z-index: 1010; /* Asegurar que esté por encima de todo */
-            }
-        }
-        
         /* Animación especial para móviles */
         @keyframes slideUpFade {
             from { opacity: 0; transform: translateY(50px); }
@@ -151,7 +116,7 @@
                 </div>
                 <div class="mt-4 sm:mt-0 sm:ml-6 flex-shrink-0">
                     <div class="bg-green-50 border border-green-300 rounded flex items-center justify-center" style="width:2cm;height:2cm;">
-                        <img src="img/qr1.png" alt="Solución ejercicio 1" class="max-w-full max-h-full object-contain" loading="lazy">
+                        <img src="../img/qr1.png" alt="Solución ejercicio 1" class="max-w-full max-h-full object-contain" loading="lazy">
                     </div>
                 </div>
             </li>
@@ -163,7 +128,7 @@
                 </div>
                 <div class="mt-4 sm:mt-0 sm:ml-6 flex-shrink-0">
                     <div class="bg-green-50 border border-green-300 rounded flex items-center justify-center" style="width:2cm;height:2cm;">
-                        <img src="img/qr2.png" alt="Solución ejercicio 1" class="max-w-full max-h-full object-contain" loading="lazy">
+                        <img src="../img/qr2.png" alt="Solución ejercicio 1" class="max-w-full max-h-full object-contain" loading="lazy">
                     </div>
                 </div>
             </li>
@@ -175,7 +140,7 @@
                 </div>
                 <div class="mt-4 sm:mt-0 sm:ml-6 flex-shrink-0">
                     <div class="bg-green-50 border border-green-300 rounded flex items-center justify-center" style="width:2cm;height:2cm;">
-                        <img src="img/qr3.png" alt="Solución ejercicio 1" class="max-w-full max-h-full object-contain" loading="lazy">
+                        <img src="../img/qr3.png" alt="Solución ejercicio 1" class="max-w-full max-h-full object-contain" loading="lazy">
                     </div>
                 </div>
             </li>
