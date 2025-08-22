@@ -3,282 +3,231 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Examen: Aprendizaje Autónomo (10 preguntas)</title>
+<title>Examen: Gestión de Recursos para el Aprendizaje</title>
 <style>
   :root{
     --bg:#f3f4f6;        /* gris claro */
     --card:#ffffff;      /* blanco */
     --ink:#1f2937;       /* gris oscuro */
-    --muted:#4b5563;     /* gris medio */
-    --brand:#16a34a;     /* verde */
-    --accent:#2563eb;    /* azul */
-    --bad:#dc2626;       /* rojo */
-    --good:#059669;      /* verde fuerte */
-    --warn:#d97706;      /* naranja */
+    --primary:#2563eb;   /* azul */
+    --correct:#16a34a;   /* verde */
+    --wrong:#dc2626;     /* rojo */
   }
-  *{box-sizing:border-box}
   body{
-    margin:0; background:var(--bg);
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial;
+    font-family: "Segoe UI", sans-serif;
+    background: var(--bg);
+    margin:0;
+    padding:2rem;
     color:var(--ink);
   }
-  .wrap{max-width:920px; margin:24px auto; padding:24px;}
-  .hero{
+  h1{
+    text-align:center;
+    margin-bottom:1rem;
+  }
+  .quiz{
+    max-width:800px;
+    margin:0 auto;
     background:var(--card);
-    border:1px solid #e5e7eb;
-    padding:24px; border-radius:16px; box-shadow: 0 6px 20px rgba(0,0,0,.05);
+    padding:2rem;
+    border-radius:1rem;
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
   }
-  h1{margin:0 0 6px; font-size:clamp(22px, 3vw, 28px)}
-  .sub{color:var(--muted); margin:0 0 12px; font-size:14px}
-  .badge{
-    display:inline-block; background:var(--accent); color:white;
-    padding:4px 10px; border-radius:999px; font-size:12px; letter-spacing:.3px;
-  }
-  .quiz{margin-top:16px; display:grid; gap:16px;}
   .q{
-    background:#f9fafb;
+    margin-bottom:1.5rem;
+    padding:1rem;
     border:1px solid #e5e7eb;
-    border-radius:14px; padding:18px;
+    border-radius:.75rem;
   }
-  .q h3{margin:0 0 10px; font-size:18px; line-height:1.3;}
-  .opts{display:grid; gap:8px; margin-top:6px}
+  .q h3{
+    margin:0 0 .75rem 0;
+    font-size:1.1rem;
+  }
+  .opts{
+    display:flex;
+    flex-direction:column;
+    gap:.5rem;
+  }
   .opt{
-    display:flex; gap:10px; align-items:flex-start; padding:10px 12px; border-radius:10px;
-    border:1px solid #e5e7eb; background:white; cursor:pointer;
-    transition:transform .05s ease, border-color .2s ease, background .2s ease;
+    cursor:pointer;
   }
-  .opt:hover{transform:translateY(-1px); border-color:var(--accent); background:#eff6ff}
-  .opt input{margin-top:2px}
   .feedback{
-    display:none; margin-top:10px; font-size:14px; line-height:1.4; padding:10px 12px; border-radius:10px;
+    margin-top:.5rem;
+    font-weight:bold;
   }
-  .feedback.ok{background:#dcfce7; border:1px solid #86efac; color:var(--good)}
-  .feedback.bad{background:#fee2e2; border:1px solid #fca5a5; color:var(--bad)}
-  .actions{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap;}
   button{
-    appearance:none; border:none; cursor:pointer; padding:12px 16px; border-radius:12px; font-weight:600;
-    background:var(--accent); color:white; box-shadow: 0 6px 18px rgba(37,99,235,.3);
+    display:block;
+    margin:1rem auto;
+    padding:.75rem 1.5rem;
+    font-size:1rem;
+    border:none;
+    border-radius:.5rem;
+    cursor:pointer;
+    background:var(--primary);
+    color:white;
   }
-  button.secondary{
-    background:#f3f4f6; color:var(--ink); border:1px solid #d1d5db; box-shadow:none;
+  button:hover{
+    opacity:.9;
   }
-  .score{margin-top:14px; font-weight:700; font-size:16px;}
-  .legend{margin-top:6px; color:var(--muted); font-size:13px;}
-  .required{color:var(--warn); font-weight:600}
-  .mark{
-    display:inline-block; margin-left:8px; padding:2px 8px; border-radius:999px; font-size:12px; font-weight:700;
+  #result{
+    text-align:center;
+    font-size:1.2rem;
+    margin-top:1rem;
   }
-  .mark.ok{background:#dcfce7; color:var(--good)}
-  .mark.bad{background:#fee2e2; color:var(--bad)}
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="hero">
-      <span class="badge">Evaluación</span>
-      <h1>Examen de Aprendizaje Autónomo</h1>
-      <p class="sub">Selecciona una opción por pregunta. Al calificar, verás retroalimentación con una breve explicación.</p>
+  <h1>Examen: Gestión de Recursos para el Aprendizaje</h1>
+  <form id="quiz" class="quiz">
 
-      <form id="quiz" class="quiz">
-        <!-- P1 -->
-        <div class="q" data-correct="b" data-explain="El aprendizaje autónomo implica que la persona asume la responsabilidad de diagnosticar sus necesidades, fijar objetivos, elegir estrategias y evaluar resultados.">
-          <h3>1) ¿Cuál opción describe mejor el Aprendizaje Autónomo?</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q1" value="a"> Un método donde el docente decide todos los contenidos, tiempos y evaluaciones.</label>
-            <label class="opt"><input type="radio" name="q1" value="b"> Un proceso en el que la persona asume la responsabilidad de su propio aprendizaje, desde el diagnóstico hasta la evaluación.</label>
-            <label class="opt"><input type="radio" name="q1" value="c"> Un conjunto de tareas estandarizadas que se repiten de forma mecánica.</label>
-            <label class="opt"><input type="radio" name="q1" value="d"> Un curso en línea sin necesidad de planificación personal.</label>
-          </div>
-          <div class="feedback"></div>
-        </div>
-
-        <!-- P2 -->
-        <div class="q" data-correct="c" data-explain="Según Malcolm Knowles, los adultos tienen una necesidad natural de ser autodirigidos y aprenden mejor cuando participan activamente en su proceso.">
-          <h3>2) De acuerdo con Malcolm Knowles, los estudiantes adultos…</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q2" value="a"> Aprenden mejor cuando reciben instrucciones detalladas y estrictas.</label>
-            <label class="opt"><input type="radio" name="q2" value="b"> Dependen por completo de la evaluación externa para progresar.</label>
-            <label class="opt"><input type="radio" name="q2" value="c"> Tienen una necesidad natural de ser autodirigidos y participar activamente en su aprendizaje.</label>
-            <label class="opt"><input type="radio" name="q2" value="d"> Requieren clases magistrales para mantener la motivación.</label>
-          </div>
-          <div class="feedback"></div>
-        </div>
-
-        <!-- P3 -->
-        <div class="q" data-correct="a" data-explain="La autogestión implica organizar tiempo, espacio y recursos para cumplir metas de aprendizaje.">
-          <h3>3) ¿Qué enunciado refleja <em>autogestión</em> en el aprendizaje?</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q3" value="a"> El estudiante planifica su agenda de estudio y selecciona recursos pertinentes.</label>
-            <label class="opt"><input type="radio" name="q3" value="b"> El docente asigna horarios y materiales obligatorios para todos.</label>
-            <label class="opt"><input type="radio" name="q3" value="c"> Se estudia solo cuando hay evaluaciones próximas.</label>
-            <label class="opt"><input type="radio" name="q3" value="d"> Se evita modificar la planificación inicial aunque no funcione.</label>
-          </div>
-          <div class="feedback"></div>
-        </div>
-
-        <!-- P4 -->
-        <div class="q" data-correct="d" data-explain="No es una característica del aprendizaje autónomo depender totalmente del docente; la responsabilidad recae principalmente en el aprendiz.">
-          <h3>4) ¿Cuál de las siguientes <strong>NO</strong> es una característica del Aprendizaje Autónomo?</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q4" value="a"> Motivación intrínseca.</label>
-            <label class="opt"><input type="radio" name="q4" value="b"> Autorreflexión periódica.</label>
-            <label class="opt"><input type="radio" name="q4" value="c"> Flexibilidad ante contextos y herramientas.</label>
-            <label class="opt"><input type="radio" name="q4" value="d"> Dependencia total del docente para tomar decisiones.</label>
-          </div>
-          <div class="feedback"></div>
-        </div>
-
-        <!-- P5 -->
-        <div class="q" data-correct="b" data-explain="La formulación de objetivos define metas claras, específicas y medibles que orientan el proceso.">
-          <h3>5) ¿En qué fase se establecen metas claras, específicas y medibles?</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q5" value="a"> Diagnóstico de necesidades.</label>
-            <label class="opt"><input type="radio" name="q5" value="b"> Formulación de objetivos.</label>
-            <label class="opt"><input type="radio" name="q5" value="c"> Ejecución.</label>
-            <label class="opt"><input type="radio" name="q5" value="d"> Evaluación.</label>
-          </div>
-          <div class="feedback"></div>
-        </div>
-
-        <!-- P6 -->
-        <div class="q" data-correct="c" data-explain="La metacognición es pensar sobre cómo se aprende: reconocer fortalezas y debilidades para ajustar estrategias.">
-          <h3>6) ¿Qué describe mejor la <em>metacognición</em>?</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q6" value="a"> Memorizar gran cantidad de información.</label>
-            <label class="opt"><input type="radio" name="q6" value="b"> Usar exclusivamente videos como recurso.</label>
-            <label class="opt"><input type="radio" name="q6" value="c"> Reflexionar sobre el propio proceso de aprendizaje para mejorarlo.</label>
-            <label class="opt"><input type="radio" name="q6" value="d"> Resolver ejercicios sin revisar errores.</label>
-          </div>
-          <div class="feedback"></div>
-        </div>
-
-        <!-- P7 -->
-        <div class="q" data-correct="a" data-explain="El rol del estudiante en este enfoque es protagónico: toma decisiones, pregunta, indaga y aplica el conocimiento.">
-          <h3>7) ¿Cuál acción representa el rol del estudiante en el Aprendizaje Autónomo?</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q7" value="a"> Tomar decisiones informadas sobre su proceso y buscar respuestas de manera crítica.</label>
-            <label class="opt"><input type="radio" name="q7" value="b"> Esperar instrucciones para cada actividad.</label>
-            <label class="opt"><input type="radio" name="q7" value="c"> Limitarse a recibir contenidos sin intervenir.</label>
-            <label class="opt"><input type="radio" name="q7" value="d"> Evitar comunidades de aprendizaje para concentrarse solo.</label>
-          </div>
-          <div class="feedback"></div>
-        </div>
-
-        <!-- P8 -->
-        <div class="q" data-correct="d" data-explain="El docente actúa como facilitador: provee recursos, fomenta pensamiento crítico y retroalimenta el proceso.">
-          <h3>8) ¿Qué función corresponde al docente como facilitador?</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q8" value="a"> Imponer el mismo ritmo a todos sin excepciones.</label>
-            <label class="opt"><input type="radio" name="q8" value="b"> Resolver todas las actividades por el estudiante.</label>
-            <label class="opt"><input type="radio" name="q8" value="c"> Calificar únicamente con pruebas objetivas.</label>
-            <label class="opt"><input type="radio" name="q8" value="d"> Orientar con recursos adecuados y brindar retroalimentación.</label>
-          </div>
-          <div class="feedback"></div>
-        </div>
-
-        <!-- P9 -->
-        <div class="q" data-correct="b" data-explain="Un beneficio clave es el desarrollo de habilidades transferibles como autorregulación, planificación y autodisciplina.">
-          <h3>9) ¿Cuál es un beneficio directo del Aprendizaje Autónomo?</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q9" value="a"> Disminución de la reflexión sobre el proceso.</label>
-            <label class="opt"><input type="radio" name="q9" value="b"> Desarrollo de habilidades transferibles (autorregulación, planificación, etc.).</label>
-            <label class="opt"><input type="radio" name="q9" value="c"> Eliminación de la necesidad de evaluar resultados.</label>
-            <label class="opt"><input type="radio" name="q9" value="d"> Sustituir todo aprendizaje colaborativo.</label>
-          </div>
-          <div class="feedback"></div>
-        </div>
-
-        <!-- P10 -->
-        <div class="q" data-correct="c" data-explain="En programación web, practicar con proyectos personales consolida y actualiza competencias en un entorno de cambio constante.">
-          <h3>10) ¿Qué práctica ejemplifica Aprendizaje Autónomo en programación web?</h3>
-          <div class="opts">
-            <label class="opt"><input type="radio" name="q10" value="a"> Esperar a que el docente actualice el temario cada año.</label>
-            <label class="opt"><input type="radio" name="q10" value="b"> Memorizar listados de funciones sin usarlas.</label>
-            <label class="opt"><input type="radio" name="q10" value="c"> Desarrollar proyectos personales para aplicar nuevas tecnologías y documentación oficial.</label>
-            <label class="opt"><input type="radio" name="q10" value="d"> Evitar comunidades como GitHub para no distraerse.</label>
-          </div>
-          <div class="feedback"></div>
-        </div>
-
-        <div class="actions">
-          <button type="button" id="grade">Calificar</button>
-          <button type="button" class="secondary" id="reset">Reiniciar</button>
-          <span id="score" class="score muted"></span>
-        </div>
-        <div class="legend">⚠️ <span class="required">Si alguna pregunta no tiene respuesta seleccionada, contará como incorrecta.</span></div>
-      </form>
+    <!-- P1 -->
+    <div class="q" data-correct="b" data-explain="La gestión de recursos para el aprendizaje consiste en identificar, organizar y usar estratégicamente recursos físicos, digitales, humanos y organizativos.">
+      <h3>1) ¿Qué significa la gestión de recursos para el aprendizaje?</h3>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q1" value="a"> Memorizar contenidos sin apoyo externo.</label>
+        <label class="opt"><input type="radio" name="q1" value="b"> Identificar, organizar y utilizar estratégicamente los recursos disponibles para aprender.</label>
+        <label class="opt"><input type="radio" name="q1" value="c"> Depender únicamente de los docentes para guiar el aprendizaje.</label>
+        <label class="opt"><input type="radio" name="q1" value="d"> Usar solo materiales impresos y físicos.</label>
+      </div>
+      <div class="feedback"></div>
     </div>
-  </div>
+
+    <!-- P2 -->
+    <div class="q" data-correct="c" data-explain="Los recursos físicos incluyen libros, manuales, artículos impresos, equipos y materiales necesarios para actividades académicas.">
+      <h3>2) ¿Cuál de los siguientes es un recurso físico?</h3>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q2" value="a"> Plataforma educativa en línea.</label>
+        <label class="opt"><input type="radio" name="q2" value="b"> Tutor académico.</label>
+        <label class="opt"><input type="radio" name="q2" value="c"> Libro de texto impreso.</label>
+        <label class="opt"><input type="radio" name="q2" value="d"> Calendario académico digital.</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- P3 -->
+    <div class="q" data-correct="a" data-explain="Los recursos digitales incluyen plataformas educativas, bibliotecas virtuales, MOOCs, software y aplicaciones para el aprendizaje.">
+      <h3>3) ¿Cuál es un ejemplo de recurso digital para el aprendizaje?</h3>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q3" value="a"> Biblioteca virtual de la universidad.</label>
+        <label class="opt"><input type="radio" name="q3" value="b"> Un grupo de estudio con compañeros.</label>
+        <label class="opt"><input type="radio" name="q3" value="c"> Una agenda física de tareas.</label>
+        <label class="opt"><input type="radio" name="q3" value="d"> Una herramienta de laboratorio presencial.</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- P4 -->
+    <div class="q" data-correct="d" data-explain="Los recursos humanos incluyen tutores, docentes, compañeros y comunidades que brindan apoyo y retroalimentación.">
+      <h3>4) ¿Qué se considera un recurso humano en el aprendizaje?</h3>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q4" value="a"> Una aplicación de notas.</label>
+        <label class="opt"><input type="radio" name="q4" value="b"> Un libro impreso.</label>
+        <label class="opt"><input type="radio" name="q4" value="c"> Una plataforma MOOC.</label>
+        <label class="opt"><input type="radio" name="q4" value="d"> Un tutor o experto académico.</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- P5 -->
+    <div class="q" data-correct="b" data-explain="Los recursos organizativos incluyen calendarios, planes de estudio, horarios y herramientas para planificar tareas.">
+      <h3>5) ¿Qué es un recurso organizativo?</h3>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q5" value="a"> Un podcast educativo.</label>
+        <label class="opt"><input type="radio" name="q5" value="b"> Un calendario académico estructurado.</label>
+        <label class="opt"><input type="radio" name="q5" value="c"> Un libro de referencia.</label>
+        <label class="opt"><input type="radio" name="q5" value="d"> Una comunidad de aprendizaje en línea.</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- P6 -->
+    <div class="q" data-correct="c" data-explain="Seleccionar críticamente los recursos implica evaluar su calidad, actualidad y relevancia frente a los objetivos de estudio.">
+      <h3>6) ¿Qué implica la evaluación crítica de los recursos?</h3>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q6" value="a"> Guardar todos los materiales sin analizarlos.</label>
+        <label class="opt"><input type="radio" name="q6" value="b"> Escoger recursos al azar.</label>
+        <label class="opt"><input type="radio" name="q6" value="c"> Analizar su calidad, relevancia y actualidad.</label>
+        <label class="opt"><input type="radio" name="q6" value="d"> Utilizar solo los recursos recomendados por un docente.</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- P7 -->
+    <div class="q" data-correct="a" data-explain="La organización eficiente de recursos implica clasificarlos y almacenarlos de forma clara para acceder fácilmente cuando se necesiten.">
+      <h3>7) ¿Cuál de las siguientes es una estrategia de organización eficiente de recursos?</h3>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q7" value="a"> Clasificar materiales en carpetas digitales y usar etiquetas.</label>
+        <label class="opt"><input type="radio" name="q7" value="b"> Acumular todos los archivos en una sola carpeta.</label>
+        <label class="opt"><input type="radio" name="q7" value="c"> Evitar el uso de herramientas digitales.</label>
+        <label class="opt"><input type="radio" name="q7" value="d"> Guardar recursos sin nombres específicos.</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- P8 -->
+    <div class="q" data-correct="d" data-explain="Optimizar tiempo y recursos incluye elaborar cronogramas, listas priorizadas y una adecuada asignación de tiempos de estudio.">
+      <h3>8) ¿Qué acción corresponde a la optimización del tiempo y recursos?</h3>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q8" value="a"> Estudiar sin plan previo.</label>
+        <label class="opt"><input type="radio" name="q8" value="b"> Usar solo recursos improvisados.</label>
+        <label class="opt"><input type="radio" name="q8" value="c"> Dedicar tiempo solo a las materias favoritas.</label>
+        <label class="opt"><input type="radio" name="q8" value="d"> Crear un cronograma con tiempos asignados y prioridades.</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- P9 -->
+    <div class="q" data-correct="b" data-explain="El uso estratégico de recursos digitales permite acceder a información actualizada, tutoriales, videos y actividades interactivas.">
+      <h3>9) ¿Qué ventaja ofrece el uso estratégico de recursos digitales?</h3>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q9" value="a"> Limitar el acceso a la información disponible.</label>
+        <label class="opt"><input type="radio" name="q9" value="b"> Acceder a información actualizada y materiales interactivos.</label>
+        <label class="opt"><input type="radio" name="q9" value="c"> Sustituir totalmente la interacción con docentes.</label>
+        <label class="opt"><input type="radio" name="q9" value="d"> Evitar tutoriales y videos educativos.</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <!-- P10 -->
+    <div class="q" data-correct="a" data-explain="Participar en redes colaborativas permite compartir experiencias, recursos y fomentar el aprendizaje autónomo y cooperativo.">
+      <h3>10) ¿Cuál es el beneficio de participar en redes colaborativas de aprendizaje?</h3>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q10" value="a"> Compartir recursos y experiencias en un entorno de colaboración.</label>
+        <label class="opt"><input type="radio" name="q10" value="b"> Aislarse del trabajo en equipo.</label>
+        <label class="opt"><input type="radio" name="q10" value="c"> Sustituir los planes organizativos individuales.</label>
+        <label class="opt"><input type="radio" name="q10" value="d"> Evitar la retroalimentación de otros estudiantes.</label>
+      </div>
+      <div class="feedback"></div>
+    </div>
+
+    <button type="button" onclick="checkQuiz()">Finalizar</button>
+    <div id="result"></div>
+  </form>
 
 <script>
-(function(){
-  const quiz = document.getElementById('quiz');
-  const gradeBtn = document.getElementById('grade');
-  const resetBtn = document.getElementById('reset');
-  const scoreEl = document.getElementById('score');
-
-  function grade(){
-    const questions = quiz.querySelectorAll('.q');
-    let correct = 0;
-    questions.forEach((q, idx)=>{
-      const name = 'q' + (idx+1);
-      const sel = quiz.querySelector('input[name="'+name+'"]:checked');
-      const fb  = q.querySelector('.feedback');
-      const correctVal = q.getAttribute('data-correct');
-      const explain = q.getAttribute('data-explain') || '';
-
-      // Clear previous classes
-      fb.classList.remove('ok','bad');
-      fb.style.display = 'block';
-
-      // Remove any existing mark
-      const oldMark = q.querySelector('.mark');
-      if(oldMark){ oldMark.remove(); }
-
-      if(sel && sel.value === correctVal){
-        correct++;
-        fb.classList.add('ok');
-        fb.textContent = '✅ ¡Correcto! ' + explain;
-        // add mark chip
-        const chip = document.createElement('span');
-        chip.className = 'mark ok';
-        chip.textContent = '✓';
-        q.querySelector('h3').appendChild(chip);
-      }else{
-        fb.classList.add('bad');
-        fb.textContent = '❌ Incorrecto. ' + explain;
-        const chip = document.createElement('span');
-        chip.className = 'mark bad';
-        chip.textContent = '×';
-        q.querySelector('h3').appendChild(chip);
-      }
-    });
-    scoreEl.textContent = 'Puntuación: ' + correct + ' / ' + questions.length + ' (' + Math.round(correct*100/questions.length) + '%)';
-  }
-
-  function resetQuiz(){
-    quiz.reset();
-    scoreEl.textContent = '';
-    quiz.querySelectorAll('.feedback').forEach(fb=>{
-      fb.style.display = 'none';
-      fb.classList.remove('ok','bad');
-      fb.textContent = '';
-    });
-    quiz.querySelectorAll('.mark').forEach(m=>m.remove());
-  }
-
-  gradeBtn.addEventListener('click', grade);
-  resetBtn.addEventListener('click', resetQuiz);
-
-  // Facilitar clic en toda la tarjeta de opción
-  quiz.querySelectorAll('.opt').forEach(label=>{
-    label.addEventListener('click', (e)=>{
-      const input = label.querySelector('input[type="radio"]');
-      // Permitir que el click nativo seleccione el radio, sin doble toggle
-      // (no se necesita lógica extra; este listener es solo para UX hovers)
-    });
+function checkQuiz(){
+  let correct=0;
+  const questions=document.querySelectorAll(".q");
+  questions.forEach((q,idx)=>{
+    const answer=q.dataset.correct;
+    const explanation=q.dataset.explain;
+    const chosen=q.querySelector("input[type=radio]:checked");
+    const feedback=q.querySelector(".feedback");
+    if(!chosen){
+      feedback.textContent="❌ No respondiste esta pregunta.";
+      feedback.style.color="var(--wrong)";
+      return;
+    }
+    if(chosen.value===answer){
+      correct++;
+      feedback.textContent="✅ Correcto. " + explanation;
+      feedback.style.color="var(--correct)";
+    } else {
+      feedback.textContent="❌ Incorrecto. " + explanation;
+      feedback.style.color="var(--wrong)";
+    }
   });
-})();
+  document.getElementById("result").textContent=`Tu puntaje: ${correct} de ${questions.length}`;
+}
 </script>
 </body>
 </html>
