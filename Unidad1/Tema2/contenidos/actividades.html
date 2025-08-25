@@ -1,3 +1,157 @@
-<section>
-  <h2 class="text-2xl font-semibold mb-4">Actividades</h2>
-</section>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actividad: Metacognición y Autorregulación</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question h3 {
+      margin-bottom: 10px;
+      color: #34495e;
+    }
+    label {
+      display: block;
+      margin: 6px 0;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+    label:hover {
+      background: #f0f0f0;
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .correct {
+      color: green;
+    }
+    .incorrect {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Actividad: Metacognición y Autorregulación</h1>
+    <form id="quizForm">
+      
+      <div class="question">
+        <h3>1. ¿Qué es la metacognición?</h3>
+        <label><input type="radio" name="q1" value="a"> Saber aplicar fórmulas matemáticas.</label>
+        <label><input type="radio" name="q1" value="b"> Pensar sobre cómo se piensa y reflexionar sobre el aprendizaje.</label>
+        <label><input type="radio" name="q1" value="c"> Recordar información de memoria sin analizarla.</label>
+      </div>
+
+      <div class="question">
+        <h3>2. ¿Cuál de estos NO corresponde al conocimiento metacognitivo?</h3>
+        <label><input type="radio" name="q2" value="a"> Conocimiento declarativo.</label>
+        <label><input type="radio" name="q2" value="b"> Conocimiento condicional.</label>
+        <label><input type="radio" name="q2" value="c"> Conocimiento emocional.</label>
+      </div>
+
+      <div class="question">
+        <h3>3. ¿Qué implica la autorregulación del aprendizaje?</h3>
+        <label><input type="radio" name="q3" value="a"> Dejar que otros decidan qué estudiar.</label>
+        <label><input type="radio" name="q3" value="b"> Dirigir, gestionar y evaluar el propio proceso de aprendizaje.</label>
+        <label><input type="radio" name="q3" value="c"> Memorizar sin reflexionar.</label>
+      </div>
+
+      <div class="question">
+        <h3>4. ¿En qué fase de la autorregulación se monitorea el desempeño?</h3>
+        <label><input type="radio" name="q4" value="a"> Planificación.</label>
+        <label><input type="radio" name="q4" value="b"> Ejecución o desempeño.</label>
+        <label><input type="radio" name="q4" value="c"> Autorreflexión.</label>
+      </div>
+
+      <div class="question">
+        <h3>5. ¿Por qué son importantes la metacognición y la autorregulación en programación web?</h3>
+        <label><input type="radio" name="q5" value="a"> Porque permiten copiar y pegar código sin entenderlo.</label>
+        <label><input type="radio" name="q5" value="b"> Porque ayudan a identificar estrategias efectivas, adaptarse a nuevas tecnologías y aprender de forma continua.</label>
+        <label><input type="radio" name="q5" value="c"> Porque reemplazan la necesidad de estudiar formalmente.</label>
+      </div>
+
+      <button type="button" onclick="checkAnswers()">Enviar Respuestas</button>
+    </form>
+
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    function checkAnswers() {
+      const correctAnswers = {
+        q1: "b",
+        q2: "c",
+        q3: "b",
+        q4: "b",
+        q5: "b"
+      };
+
+      let form = document.getElementById("quizForm");
+      let score = 0;
+      let total = Object.keys(correctAnswers).length;
+      let feedback = "";
+
+      for (let q in correctAnswers) {
+        let answer = form[q].value;
+        if (answer === correctAnswers[q]) {
+          score++;
+          feedback += `<p class="correct">✔ Pregunta ${q.slice(1)} correcta</p>`;
+        } else {
+          feedback += `<p class="incorrect">✘ Pregunta ${q.slice(1)} incorrecta</p>`;
+        }
+      }
+
+      document.getElementById("result").innerHTML = `
+        Obtuviste ${score} de ${total} respuestas correctas.
+        ${feedback}
+      `;
+    }
+  </script>
+</body>
+</html>
