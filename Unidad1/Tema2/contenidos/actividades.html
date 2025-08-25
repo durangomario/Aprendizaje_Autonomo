@@ -49,7 +49,7 @@
     label {
       display: flex;
       align-items: center;
-      margin: 10px 0;
+      margin: 8px 0;
       padding: 12px;
       border: 2px solid #ddd;
       border-radius: 12px;
@@ -96,6 +96,11 @@
       text-align: center;
       background: #f0f9ff;
       border: 2px dashed #3498db;
+    }
+
+    .feedback {
+      margin-top: 10px;
+      font-size: 15px;
     }
 
     .correct { color: green; font-weight: bold; }
@@ -150,35 +155,38 @@
 
   <script>
     document.getElementById("quizForm").addEventListener("submit", function(e) {
-      e.preventDefault(); // evita recarga de la página
+      e.preventDefault();
 
       const correctAnswers = {
-        q1: "b",
-        q2: "c",
-        q3: "b",
-        q4: "b",
-        q5: "b"
+        q1: {answer: "b", feedback: "La metacognición es reflexionar sobre cómo aprendemos."},
+        q2: {answer: "c", feedback: "El conocimiento emocional no forma parte del metacognitivo."},
+        q3: {answer: "b", feedback: "La autorregulación implica planear, monitorear y evaluar el aprendizaje."},
+        q4: {answer: "b", feedback: "En la fase de ejecución se monitorea el desempeño."},
+        q5: {answer: "b", feedback: "Son importantes porque ayudan a aprender de manera autónoma y continua."}
       };
 
       let form = e.target;
       let score = 0;
       let total = Object.keys(correctAnswers).length;
-      let feedback = "";
+      let feedbackHTML = "";
 
       for (let q in correctAnswers) {
         let selected = form[q].value;
-        if (selected === correctAnswers[q]) {
+        if (selected === correctAnswers[q].answer) {
           score++;
-          feedback += `<p class="correct">✔ Pregunta ${q.slice(1)} correcta</p>`;
+          feedbackHTML += `<p class="correct">✔ Pregunta ${q.slice(1)} correcta. <span class="feedback">${correctAnswers[q].feedback}</span></p>`;
         } else {
-          feedback += `<p class="incorrect">✘ Pregunta ${q.slice(1)} incorrecta</p>`;
+          feedbackHTML += `<p class="incorrect">✘ Pregunta ${q.slice(1)} incorrecta. <span class="feedback">${correctAnswers[q].feedback}</span></p>`;
         }
       }
 
+      let porcentaje = Math.round((score / total) * 100);
+
       document.getElementById("result").innerHTML = `
-        <h2>📊 Resultado</h2>
+        <h2>📊 Resultado Final</h2>
         <p>Obtuviste <b>${score}</b> de <b>${total}</b> respuestas correctas.</p>
-        ${feedback}
+        <p>Calificación: <b>${porcentaje}%</b></p>
+        ${feedbackHTML}
       `;
     });
   </script>
