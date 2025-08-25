@@ -77,7 +77,7 @@
 <body>
   <div class="container">
     <h1>Quiz: Metacognición y Autorregulación</h1>
-    <form id="quizForm">
+    <form id="quizForm" onsubmit="return false;">
       
       <div class="question">
         <h3>1. ¿Qué es la metacognición?</h3>
@@ -120,13 +120,15 @@
         <div class="feedback" id="feedback5"></div>
       </div>
       
-      <button type="button" onclick="checkAnswers()">Enviar respuestas</button>
+      <button type="button" id="btnEnviar">Enviar respuestas</button>
     </form>
     
     <div id="result"></div>
   </div>
 
   <script>
+    document.getElementById("btnEnviar").addEventListener("click", checkAnswers);
+
     function checkAnswers() {
       let total = 5;
       let score = 0;
