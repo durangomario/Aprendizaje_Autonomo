@@ -1,235 +1,186 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Actividad: Ejemplo práctico de Aprendizaje Autónomo</title>
-<style>
-  :root{
-    --bg:#f3f4f6; --card:#ffffff; --ink:#111827; --muted:#6b7280;
-    --accent:#2563eb; --good:#059669; --warn:#d97706; --ring:#e5e7eb;
-  }
-  *{box-sizing:border-box}
-  body{margin:0; background:var(--bg); color:var(--ink); font-family:system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial;}
-  .wrap{max-width:980px; margin:28px auto; padding:20px;}
-  .card{
-    background:var(--card); border:1px solid var(--ring); border-radius:16px; padding:22px;
-    box-shadow:0 8px 24px rgba(0,0,0,.06);
-  }
-  .head{
-    display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
-  }
-  h1{margin:0; font-size:clamp(22px,3vw,28px)}
-  .sub{margin:4px 0 0; color:var(--muted); font-size:14px}
-  .badge{display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#fff; padding:6px 12px; border-radius:999px; font-weight:600; font-size:12px}
-  .grid{display:grid; gap:16px; margin-top:16px}
-  @media(min-width:900px){ .grid{grid-template-columns:1.1fr 1fr} }
-  .section{border:1px solid var(--ring); border-radius:14px; padding:16px; background:#fafbff}
-  .section h2{margin:0 0 8px; font-size:18px}
-  .field{margin:8px 0; display:grid; gap:4px}
-  .label{font-size:12px; color:var(--muted); letter-spacing:.2px; text-transform:uppercase}
-  .value{background:#fff; border:1px solid var(--ring); padding:10px 12px; border-radius:10px}
-  ul{margin:8px 0 0 20px}
-  li{margin:6px 0}
-  .timeline{display:grid; gap:10px; margin-top:8px}
-  .pill{display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; background:#eef2ff; color:#3730a3; border:1px solid #e0e7ff}
-  table{width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:12px; border:1px solid var(--ring); background:#fff}
-  th, td{padding:10px 12px; border-bottom:1px solid var(--ring); font-size:14px; text-align:left}
-  tr:last-child td{border-bottom:none}
-  .foot{display:flex; gap:8px; flex-wrap:wrap; margin-top:18px}
-  button{
-    appearance:none; border:none; cursor:pointer; padding:10px 14px; border-radius:12px; font-weight:700;
-    background:var(--accent); color:#fff; box-shadow:0 8px 18px rgba(37,99,235,.25);
-  }
-  button.secondary{background:#eef2ff; color:#1e3a8a}
-  .hint{font-size:12px; color:var(--muted); margin-top:6px}
-  [contenteditable="true"]{outline:2px dashed #93c5fd; outline-offset:2px; border-radius:8px}
-  .result{border-left:4px solid var(--good); background:#ecfdf5; padding:12px; border-radius:8px; margin-top:10px}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actividad: Aprendizaje Autónomo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      margin: 0;
+      padding: 0;
+      color: #1f2937;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    section.actividad {
+      max-width: 800px;
+      background: white;
+      margin: 30px auto;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #1e40af;
+      margin-bottom: 15px;
+    }
+
+    ol {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      margin: 5px 0;
+    }
+
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      padding: 15px;
+      font-weight: bold;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .correcto {
+      background: #d1fae5;
+      color: #065f46;
+      border: 2px solid #10b981;
+    }
+
+    .incorrecto {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 2px solid #ef4444;
+    }
+  </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="card">
-      <div class="head">
-        <div>
-          <div class="badge">Actividad · Aprendizaje Autónomo</div>
-          <h1>Ejemplo práctico de Aprendizaje Autónomo</h1>
-          <p class="sub">Caso realista para analizar fases, estrategias y evidencias de aprendizaje autorregulado.</p>
-        </div>
-        <div class="foot">
-          <button id="toggleEdit">Modo Editar</button>
-          <button class="secondary" onclick="window.print()">Imprimir / Guardar PDF</button>
-        </div>
-      </div>
 
-      <div class="grid">
-        <!-- Datos del caso -->
-        <section class="section" id="datos">
-          <h2>Datos del caso</h2>
-          <div class="field">
-            <span class="label">Nombre del estudiante</span>
-            <div class="value" data-ed="true">Laura Pérez</div>
-          </div>
-          <div class="field">
-            <span class="label">Meta de aprendizaje</span>
-            <div class="value" data-ed="true">Aprender los fundamentos de HTML y CSS para diseñar una página web básica.</div>
-          </div>
-          <div class="field">
-            <span class="label">Motivación</span>
-            <div class="value" data-ed="true">Aplicar a una pasantía donde se exige conocer diseño web.</div>
-          </div>
-          <div class="field">
-            <span class="label">Duración del plan</span>
-            <div class="value" data-ed="true"><span class="pill">4 semanas</span></div>
-          </div>
-        </section>
+  <header>
+    <h1>Actividad de Aprendizaje</h1>
+    <p>¿Qué es el Aprendizaje Autónomo?</p>
+  </header>
 
-        <!-- Acciones autónomas -->
-        <section class="section" id="acciones">
-          <h2>Acciones autónomas realizadas</h2>
-          <ul data-ed="true">
-            <li>Estableció un plan de estudio de 4 semanas.</li>
-            <li>Utilizó la plataforma <strong>freeCodeCamp.org</strong> para practicar con ejercicios interactivos.</li>
-            <li>Tomó notas y creó un glosario con los conceptos nuevos.</li>
-            <li>Diseñó una página web personal como proyecto final.</li>
-            <li>Evaluó su avance haciendo una autoevaluación semanal.</li>
-            <li>Buscó retroalimentación de sus compañeros a través de un foro.</li>
+  <section class="actividad">
+    <h2>📘 Responde las siguientes preguntas</h2>
+    <p>Marca la opción correcta en cada caso y al final verifica tus respuestas.</p>
+
+    <form id="quiz">
+      <ol>
+        <li>
+          <p><strong>1. ¿Qué significa Aprendizaje Autónomo?</strong></p>
+          <ul>
+            <li><label><input type="radio" name="p1" value="0"> Depender totalmente del docente para aprender.</label></li>
+            <li><label><input type="radio" name="p1" value="1"> Asumir la responsabilidad del propio aprendizaje.</label></li>
+            <li><label><input type="radio" name="p1" value="0"> Estudiar solo en espacios presenciales.</label></li>
           </ul>
-          <p class="hint">Sugerencia: agrega enlaces a evidencias (repositorio, capturas, documentos de notas).</p>
-        </section>
-      </div>
+        </li>
 
-      <!-- Seguimiento y autoevaluación -->
-      <section class="section">
-        <h2>Seguimiento y autoevaluación (semanal)</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Semana</th>
-              <th>Objetivo</th>
-              <th>Autoevaluación (1–5)</th>
-              <th>Notas / Ajustes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td contenteditable="true">Estructura básica de HTML (etiquetas, jerarquía, semántica).</td>
-              <td contenteditable="true">4</td>
-              <td contenteditable="true">Repasar etiquetas semánticas &lt;header&gt;, &lt;main&gt;, &lt;footer&gt;.</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td contenteditable="true">Selectores y cascada en CSS, box model.</td>
-              <td contenteditable="true">3</td>
-              <td contenteditable="true">Practicar más ejercicios de especificidad.</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td contenteditable="true">Layout con Flexbox y Grid.</td>
-              <td contenteditable="true">4</td>
-              <td contenteditable="true">Crear mini-layouts y clonar un diseño simple.</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td contenteditable="true">Proyecto personal y publicación.</td>
-              <td contenteditable="true">5</td>
-              <td contenteditable="true">Pulir accesibilidad básica y responsive.</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+        <li>
+          <p><strong>2. ¿Cuál de estas es una característica del Aprendizaje Autónomo?</strong></p>
+          <ul>
+            <li><label><input type="radio" name="p2" value="0"> La obligación de seguir un único método impuesto.</label></li>
+            <li><label><input type="radio" name="p2" value="1"> La motivación intrínseca del estudiante.</label></li>
+            <li><label><input type="radio" name="p2" value="0"> La ausencia de reflexión crítica.</label></li>
+          </ul>
+        </li>
 
-      <!-- Resultado -->
-      <section class="section">
-        <h2>Resultado</h2>
-        <div class="result" data-ed="true">
-          Laura logró crear una página web funcional, entendió la estructura del código HTML y los estilos CSS, y pudo mostrar su trabajo en una entrevista.
-        </div>
-      </section>
+        <li>
+          <p><strong>3. ¿Por qué es importante el Aprendizaje Autónomo en el contexto actual?</strong></p>
+          <ul>
+            <li><label><input type="radio" name="p3" value="0"> Porque el docente no tiene ninguna responsabilidad.</label></li>
+            <li><label><input type="radio" name="p3" value="1"> Porque el mercado laboral exige profesionales que aprendan continuamente.</label></li>
+            <li><label><input type="radio" name="p3" value="0"> Porque reemplaza completamente la educación virtual.</label></li>
+          </ul>
+        </li>
 
-      <!-- Actividades sugeridas -->
-   
-      <div class="foot">
-        <button id="exportBtn" class="secondary">Exportar como .txt (resumen)</button>
-      </div>
-    </div>
-  </div>
+        <li>
+          <p><strong>4. ¿Cuál de las siguientes corresponde a una fase del Aprendizaje Autónomo?</strong></p>
+          <ul>
+            <li><label><input type="radio" name="p4" value="1"> Diagnóstico, objetivos, planificación, ejecución y evaluación.</label></li>
+            <li><label><input type="radio" name="p4" value="0"> Lectura, copia, memorización y examen.</label></li>
+            <li><label><input type="radio" name="p4" value="0"> Escuchar, repetir y olvidar.</label></li>
+          </ul>
+        </li>
 
-<script>
-  // Alternar modo edición para elementos marcados con data-ed
-  const toggleBtn = document.getElementById('toggleEdit');
-  let editing = false;
-  toggleBtn.addEventListener('click', ()=>{
-    editing = !editing;
-    document.querySelectorAll('[data-ed]').forEach(el=>{
-      el.setAttribute('contenteditable', editing ? 'true' : 'false');
-    });
-    toggleBtn.textContent = editing ? 'Salir de edición' : 'Modo Editar';
-  });
+        <li>
+          <p><strong>5. En el Aprendizaje Autónomo, el rol principal del estudiante es:</strong></p>
+          <ul>
+            <li><label><input type="radio" name="p5" value="0"> Ser receptor pasivo de contenidos.</label></li>
+            <li><label><input type="radio" name="p5" value="1"> Tomar decisiones y gestionar su propio proceso de aprendizaje.</label></li>
+            <li><label><input type="radio" name="p5" value="0"> Depender exclusivamente de las instrucciones del docente.</label></li>
+          </ul>
+        </li>
+      </ol>
 
-  // Exportar un resumen simple en .txt
-  document.getElementById('exportBtn').addEventListener('click', ()=>{
-    const nombre = document.querySelector('#datos .field:nth-child(2) .value').innerText.trim();
-    const meta   = document.querySelector('#datos .field:nth-child(3) .value').innerText.trim();
-    const motiv  = document.querySelector('#datos .field:nth-child(4) .value').innerText.trim();
-    const accs   = Array.from(document.querySelectorAll('#acciones ul li')).map(li=>'- '+li.innerText.trim()).join('\n');
-    const res    = document.querySelector('.result').innerText.trim();
+      <button type="button" onclick="verificarRespuestas()">Verificar respuestas</button>
+    </form>
 
-    const contenido =
-`Actividad: Aprendizaje Autónomo
---------------------------------
-Nombre: ${nombre}
-Meta: ${meta}
-Motivación: ${motiv}
+    <div id="resultado"></div>
+  </section>
 
-Acciones autónomas:
-${accs}
+  <script>
+    function verificarRespuestas() {
+      let correctas = 0;
+      const total = 5;
+      const form = document.forms["quiz"];
 
-Resultado:
-${res}
-`;
+      for (let i = 1; i <= total; i++) {
+        const respuesta = form["p" + i].value;
+        if (respuesta === "1") {
+          correctas++;
+        }
+      }
 
-    const blob = new Blob([contenido], {type:'text/plain;charset=utf-8'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = 'actividad-aprendizaje-autonomo.txt';
-    document.body.appendChild(a); a.click(); a.remove();
-    URL.revokeObjectURL(url);
-  });
-</script>
+      const resultado = document.getElementById("resultado");
+      resultado.style.display = "block";
 
-
-<!-- ===================================================== -->
-<!-- NUEVA SECCIÓN: Actividades para desarrollar el AA     -->
-<!-- Pégala dentro del <div class="card"> de tu documento  -->
-<!-- ===================================================== -->
-<section class="section" id="actividades-autonomo">
-  <h2>Actividades para desarrollar el Aprendizaje Autónomo</h2>
-  <p class="sub" data-ed="true">
-    Estas actividades te ayudarán a fortalecer planificación, autoevaluación, reflexión crítica y uso de recursos digitales durante la Unidad 1.
-  </p>
-
-  <!-- Actividad 1 -->
-  <article class="section" style="background:#fff">
-    <h3>Actividad 1: Diario de autoaprendizaje</h3>
-    <p><strong>Objetivo:</strong> <span data-ed="true">Desarrollar conciencia sobre tu forma de aprender.</span></p>
-    <h4>Instrucciones</h4>
-    <ul data-ed="true">
-      <li>Durante una semana, escribe un diario donde registres:
-        <ul>
-          <li>¿Qué estudiaste hoy?</li>
-          <li>¿Qué dificultades tuviste?</li>
-          <li>¿Cómo las solucionaste?</li>
-          <li>¿Qué estrategias funcionaron mejor?</li>
-        </ul>
-      </li>
-      <li>Al final de la semana, reflexiona: <em>¿Cómo podrías mejorar?</em></li>
-    </ul>
-  </article>
-
-</section>
-
+      if (correctas === total) {
+        resultado.className = "correcto";
+        resultado.textContent = "🎉 ¡Excelente! Has respondido correctamente todas las preguntas.";
+      } else {
+        resultado.className = "incorrecto";
+        resultado.textContent = "✅ Respuestas correctas: " + correctas + " de " + total + ". Sigue repasando los conceptos.";
+      }
+    }
+  </script>
 
 </body>
 </html>
