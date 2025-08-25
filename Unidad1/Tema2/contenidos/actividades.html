@@ -6,7 +6,7 @@
   <title>Actividad: Metacognición y Autorregulación</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
       margin: 0;
       padding: 20px;
@@ -39,11 +39,6 @@
       background: #f9f9ff;
       border-radius: 15px;
       border-left: 8px solid #3498db;
-      transition: transform 0.3s ease;
-    }
-
-    .question:hover {
-      transform: scale(1.02);
     }
 
     .question h3 {
@@ -59,8 +54,8 @@
       border: 2px solid #ddd;
       border-radius: 12px;
       cursor: pointer;
-      transition: 0.3s;
       background: #fff;
+      transition: 0.3s;
     }
 
     input[type="radio"] {
@@ -91,7 +86,6 @@
 
     button:hover {
       background: #217dbb;
-      transform: scale(1.02);
     }
 
     .result {
@@ -102,18 +96,10 @@
       text-align: center;
       background: #f0f9ff;
       border: 2px dashed #3498db;
-      animation: fadeIn 1s ease-in-out;
     }
 
-    .correct {
-      color: green;
-      font-weight: bold;
-    }
-
-    .incorrect {
-      color: red;
-      font-weight: bold;
-    }
+    .correct { color: green; font-weight: bold; }
+    .incorrect { color: red; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -156,14 +142,16 @@
         <label><input type="radio" name="q5" value="c"> Porque reemplazan la necesidad de estudiar formalmente.</label>
       </div>
 
-      <button type="button" onclick="checkAnswers()">✅ Enviar Respuestas</button>
+      <button type="submit">✅ Enviar Respuestas</button>
     </form>
 
     <div id="result" class="result"></div>
   </div>
 
   <script>
-    function checkAnswers() {
+    document.getElementById("quizForm").addEventListener("submit", function(e) {
+      e.preventDefault(); // evita recarga de la página
+
       const correctAnswers = {
         q1: "b",
         q2: "c",
@@ -172,14 +160,14 @@
         q5: "b"
       };
 
-      let form = document.getElementById("quizForm");
+      let form = e.target;
       let score = 0;
       let total = Object.keys(correctAnswers).length;
       let feedback = "";
 
       for (let q in correctAnswers) {
-        let answer = form[q].value;
-        if (answer === correctAnswers[q]) {
+        let selected = form[q].value;
+        if (selected === correctAnswers[q]) {
           score++;
           feedback += `<p class="correct">✔ Pregunta ${q.slice(1)} correcta</p>`;
         } else {
@@ -192,7 +180,7 @@
         <p>Obtuviste <b>${score}</b> de <b>${total}</b> respuestas correctas.</p>
         ${feedback}
       `;
-    }
+    });
   </script>
 </body>
 </html>
