@@ -21,7 +21,7 @@
     }
 
     section.actividad {
-      max-width: 800px;
+      max-width: 850px;
       background: white;
       margin: 30px auto;
       padding: 25px;
@@ -71,7 +71,7 @@
     }
 
     #resultado {
-      margin-top: 20px;
+      margin-top: 25px;
       padding: 15px;
       font-weight: bold;
       border-radius: 8px;
@@ -88,6 +88,25 @@
       background: #fee2e2;
       color: #991b1b;
       border: 2px solid #ef4444;
+    }
+
+    .feedback {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .feedback.correcto {
+      background: #ecfdf5;
+      border-left: 5px solid #10b981;
+      color: #065f46;
+    }
+
+    .feedback.incorrecto {
+      background: #fef2f2;
+      border-left: 5px solid #ef4444;
+      color: #991b1b;
     }
   </style>
 </head>
@@ -154,18 +173,34 @@
     </form>
 
     <div id="resultado"></div>
+    <div id="detalles"></div>
   </section>
 
   <script>
+    const respuestasCorrectas = {
+      p1: "1",
+      p2: "1",
+      p3: "1",
+      p4: "1",
+      p5: "1"
+    };
+
     function verificarRespuestas() {
       let correctas = 0;
-      const total = 5;
+      const total = Object.keys(respuestasCorrectas).length;
       const form = document.forms["quiz"];
+      const detallesDiv = document.getElementById("detalles");
+      detallesDiv.innerHTML = ""; // limpiar antes de mostrar
 
       for (let i = 1; i <= total; i++) {
-        const respuesta = form["p" + i].value;
-        if (respuesta === "1") {
+        const pregunta = "p" + i;
+        const seleccionada = form[pregunta].value;
+
+        if (seleccionada === respuestasCorrectas[pregunta]) {
           correctas++;
+          detallesDiv.innerHTML += `<div class="feedback correcto">✔️ Pregunta ${i}: Correcta</div>`;
+        } else {
+          detallesDiv.innerHTML += `<div class="feedback incorrecto">❌ Pregunta ${i}: Incorrecta. La respuesta correcta era la opción ${respuestasCorrectas[pregunta]}.</div>`;
         }
       }
 
@@ -177,7 +212,7 @@
         resultado.textContent = "🎉 ¡Excelente! Has respondido correctamente todas las preguntas.";
       } else {
         resultado.className = "incorrecto";
-        resultado.textContent = "✅ Respuestas correctas: " + correctas + " de " + total + ". Sigue repasando los conceptos.";
+        resultado.textContent = `✅ Respuestas correctas: ${correctas} de ${total}. Revisa el detalle de tus errores abajo.`;
       }
     }
   </script>
