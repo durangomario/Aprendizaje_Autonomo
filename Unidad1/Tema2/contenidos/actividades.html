@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Actividad: Metacognición y Autorregulación</title>
+  <title>Quiz: Metacognición y Autorregulación</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -65,10 +65,13 @@
     .incorrect {
       color: red;
     }
+    .not-answered {
+      color: orange;
+    }
     #result {
       text-align: center;
-      margin-top: 20px;
-      font-size: 18px;
+      margin-top: 25px;
+      font-size: 20px;
       font-weight: bold;
       color: #2c3e50;
     }
@@ -134,11 +137,11 @@
       let score = 0;
 
       for (let i = 1; i <= total; i++) {
-        let question = document.querySelector(`input[name="q${i}"]:checked`);
+        let selected = document.querySelector(`input[name="q${i}"]:checked`);
         let feedback = document.getElementById(`feedback${i}`);
-        
-        if (question) {
-          if (question.value === "correct") {
+
+        if (selected) {
+          if (selected.value === "correct") {
             score++;
             feedback.textContent = "✅ ¡Correcto!";
             feedback.className = "feedback correct";
@@ -148,7 +151,7 @@
           }
         } else {
           feedback.textContent = "⚠️ No respondiste esta pregunta.";
-          feedback.className = "feedback incorrect";
+          feedback.className = "feedback not-answered";
         }
       }
 
