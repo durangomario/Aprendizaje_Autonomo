@@ -88,13 +88,13 @@
         <label><input type="radio" name="q5" value="b"> Porque ayudan a identificar estrategias efectivas, adaptarse a nuevas tecnologías y aprender de forma continua.</label>
         <label><input type="radio" name="q5" value="c"> Porque reemplazan la necesidad de estudiar formalmente.</label>
       </div>
-      <button type="submit">✅ Enviar Respuestas</button>
+      <button type="button" id="submitBtn">✅ Enviar Respuestas</button>
     </form>
     <div id="result" class="result"></div>
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("submitBtn").addEventListener("click", function () {
       const form = document.getElementById("quizForm");
       const resultDiv = document.getElementById("result");
 
@@ -106,49 +106,43 @@
         q5: { answer: "b", feedback: "Son importantes porque ayudan a aprender de manera autónoma y continua." }
       };
 
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        let score = 0;
-        let total = Object.keys(correctAnswers).length;
-        let feedbackHTML = "";
+      let score = 0;
+      let total = Object.keys(correctAnswers).length;
+      let feedbackHTML = "";
 
-        // Reset estilos
-        const labels = form.querySelectorAll("label");
-        labels.forEach(l => {
-          l.classList.remove("highlight-correct", "highlight-incorrect");
+      // reset estilos
+      form.querySelectorAll("label").forEach(l => {
+        l.classList.remove("highlight-correct", "highlight-incorrect");
+      });
+
+      for (let q in correctAnswers) {
+        let selected = form.querySelector(`input[name="${q}"]:checked`);
+        let radios = form.querySelectorAll(`input[name="${q}"]`);
+
+        radios.forEach(r => {
+          if (r.value === correctAnswers[q].answer) {
+            r.parentElement.classList.add("highlight-correct");
+          }
+          if (selected && r.checked && r.value !== correctAnswers[q].answer) {
+            r.parentElement.classList.add("highlight-incorrect");
+          }
         });
 
-        for (let q in correctAnswers) {
-          let selected = form[q].value;
-          let radios = form[q];
-
-          // marcar respuestas correctas e incorrectas en el formulario
-          for (let r of radios) {
-            if (r.value === correctAnswers[q].answer) {
-              r.parentElement.classList.add("highlight-correct");
-            }
-            if (r.checked && r.value !== correctAnswers[q].answer) {
-              r.parentElement.classList.add("highlight-incorrect");
-            }
-          }
-
-          if (selected === correctAnswers[q].answer) {
-            score++;
-            feedbackHTML += `<p class="correct">✔ Pregunta ${q.slice(1)} correcta. ${correctAnswers[q].feedback}</p>`;
-          } else {
-            feedbackHTML += `<p class="incorrect">✘ Pregunta ${q.slice(1)} incorrecta. ${correctAnswers[q].feedback}</p>`;
-          }
+        if (selected && selected.value === correctAnswers[q].answer) {
+          score++;
+          feedbackHTML += `<p class="correct">✔ Pregunta ${q.slice(1)} correcta. ${correctAnswers[q].feedback}</p>`;
+        } else {
+          feedbackHTML += `<p class="incorrect">✘ Pregunta ${q.slice(1)} incorrecta. ${correctAnswers[q].feedback}</p>`;
         }
+      }
 
-        let porcentaje = Math.round((score / total) * 100);
-
-        resultDiv.innerHTML = `
-          <h2>📊 Resultado Final</h2>
-          <p>Obtuviste <b>${score}</b> de <b>${total}</b> respuestas correctas.</p>
-          <p>Calificación: <b>${porcentaje}%</b></p>
-          ${feedbackHTML}
-        `;
-      });
+      let porcentaje = Math.round((score / total) * 100);
+      resultDiv.innerHTML = `
+        <h2>📊 Resultado Final</h2>
+        <p>Obtuviste <b>${score}</b> de <b>${total}</b> respuestas correctas.</p>
+        <p>Calificación: <b>${porcentaje}%</b></p>
+        ${feedbackHTML}
+      `;
     });
   </script>
 </body>
