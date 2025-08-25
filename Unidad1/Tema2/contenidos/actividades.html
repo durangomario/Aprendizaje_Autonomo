@@ -6,79 +6,119 @@
   <title>Actividad: Metacognición y Autorregulación</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
       margin: 0;
       padding: 20px;
     }
+
     .container {
-      max-width: 800px;
+      max-width: 850px;
       margin: auto;
       background: white;
       padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+      border-radius: 20px;
+      box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
+      animation: fadeIn 1s ease-in-out;
     }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     h1 {
       text-align: center;
       color: #2c3e50;
+      margin-bottom: 25px;
     }
+
     .question {
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+      padding: 20px;
+      background: #f9f9ff;
+      border-radius: 15px;
+      border-left: 8px solid #3498db;
+      transition: transform 0.3s ease;
     }
+
+    .question:hover {
+      transform: scale(1.02);
+    }
+
     .question h3 {
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       color: #34495e;
     }
+
     label {
-      display: block;
-      margin: 6px 0;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 12px;
       cursor: pointer;
       transition: 0.3s;
+      background: #fff;
     }
+
     input[type="radio"] {
-      margin-right: 8px;
+      accent-color: #3498db;
+      margin-right: 12px;
+      transform: scale(1.2);
     }
+
     label:hover {
-      background: #f0f0f0;
+      background: #ecf6ff;
+      border-color: #3498db;
     }
+
     button {
       display: block;
       width: 100%;
-      padding: 12px;
-      font-size: 16px;
+      padding: 15px;
+      font-size: 18px;
       background: #3498db;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       cursor: pointer;
       margin-top: 20px;
-    }
-    button:hover {
-      background: #2980b9;
-    }
-    .result {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 8px;
-      text-align: center;
-      font-size: 18px;
       font-weight: bold;
+      transition: 0.3s;
     }
+
+    button:hover {
+      background: #217dbb;
+      transform: scale(1.02);
+    }
+
+    .result {
+      margin-top: 25px;
+      padding: 20px;
+      border-radius: 12px;
+      font-size: 18px;
+      text-align: center;
+      background: #f0f9ff;
+      border: 2px dashed #3498db;
+      animation: fadeIn 1s ease-in-out;
+    }
+
     .correct {
       color: green;
+      font-weight: bold;
     }
+
     .incorrect {
       color: red;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Actividad: Metacognición y Autorregulación</h1>
+    <h1>🌟 Actividad: Metacognición y Autorregulación 🌟</h1>
     <form id="quizForm">
       
       <div class="question">
@@ -116,7 +156,7 @@
         <label><input type="radio" name="q5" value="c"> Porque reemplazan la necesidad de estudiar formalmente.</label>
       </div>
 
-      <button type="button" onclick="checkAnswers()">Enviar Respuestas</button>
+      <button type="button" onclick="checkAnswers()">✅ Enviar Respuestas</button>
     </form>
 
     <div id="result" class="result"></div>
@@ -148,7 +188,8 @@
       }
 
       document.getElementById("result").innerHTML = `
-        Obtuviste ${score} de ${total} respuestas correctas.
+        <h2>📊 Resultado</h2>
+        <p>Obtuviste <b>${score}</b> de <b>${total}</b> respuestas correctas.</p>
         ${feedback}
       `;
     }
