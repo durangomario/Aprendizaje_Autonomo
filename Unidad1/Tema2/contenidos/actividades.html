@@ -2,163 +2,158 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz: Metacognición y Autorregulación</title>
+  <title>Actividad: Metacognición y Autorregulación</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #f4f6f9;
       margin: 0;
-      padding: 0;
+      padding: 20px;
     }
     .container {
       max-width: 800px;
-      margin: 30px auto;
+      margin: auto;
       background: #fff;
-      padding: 20px 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
     }
     h1 {
       text-align: center;
       color: #2c3e50;
     }
     .question {
-      margin: 20px 0;
-      padding: 15px;
-      border-left: 5px solid #3498db;
-      background: #ecf6fc;
-      border-radius: 5px;
+      margin-bottom: 20px;
     }
-    .options {
-      margin: 10px 0;
+    .question h3 {
+      color: #34495e;
     }
     label {
       display: block;
-      margin-bottom: 8px;
+      padding: 8px;
+      background: #ecf0f1;
+      margin: 6px 0;
+      border-radius: 6px;
       cursor: pointer;
+      transition: background 0.3s;
+    }
+    label:hover {
+      background: #dfe6e9;
     }
     button {
       display: block;
       margin: 20px auto;
-      padding: 10px 25px;
-      background: #3498db;
-      color: white;
+      padding: 12px 25px;
       border: none;
+      background: #27ae60;
+      color: white;
       border-radius: 8px;
       cursor: pointer;
       font-size: 16px;
+      transition: background 0.3s;
     }
     button:hover {
-      background: #2980b9;
+      background: #219150;
     }
-    #result {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 8px;
+    .feedback {
+      margin-top: 10px;
       font-weight: bold;
-      text-align: center;
     }
     .correct {
-      color: #27ae60;
+      color: green;
     }
     .incorrect {
-      color: #e74c3c;
+      color: red;
+    }
+    #result {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #2c3e50;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Quiz: Metacognición y Autorregulación</h1>
-    <form id="quizForm">
-
-      <!-- Pregunta 1 -->
+    <form id="quizForm" onsubmit="return false;">
+      
       <div class="question">
-        <p>1. ¿Qué es la metacognición?</p>
-        <div class="options">
-          <label><input type="radio" name="q1" value="a"> La capacidad de memorizar información de manera rápida.</label>
-          <label><input type="radio" name="q1" value="b"> La capacidad de reflexionar sobre los propios procesos de pensamiento y aprendizaje.</label>
-          <label><input type="radio" name="q1" value="c"> El conocimiento técnico de un área específica.</label>
-        </div>
+        <h3>1. ¿Qué es la metacognición?</h3>
+        <label><input type="radio" name="q1" value="correct"> Reflexionar sobre los propios procesos de pensamiento y aprendizaje.</label>
+        <label><input type="radio" name="q1" value="incorrect"> Memorizar información sin analizarla.</label>
+        <label><input type="radio" name="q1" value="incorrect"> Aplicar estrategias sin cuestionarlas.</label>
+        <div class="feedback" id="feedback1"></div>
       </div>
-
-      <!-- Pregunta 2 -->
+      
       <div class="question">
-        <p>2. ¿Cuál de los siguientes es un tipo de conocimiento metacognitivo?</p>
-        <div class="options">
-          <label><input type="radio" name="q2" value="a"> Declarativo, Procedimental y Condicional.</label>
-          <label><input type="radio" name="q2" value="b"> Teórico, Práctico y Conceptual.</label>
-          <label><input type="radio" name="q2" value="c"> Analítico, Crítico y Reflexivo.</label>
-        </div>
+        <h3>2. ¿Cuál de los siguientes NO es un tipo de conocimiento metacognitivo?</h3>
+        <label><input type="radio" name="q2" value="incorrect"> Declarativo</label>
+        <label><input type="radio" name="q2" value="incorrect"> Procedimental</label>
+        <label><input type="radio" name="q2" value="correct"> Experimental</label>
+        <label><input type="radio" name="q2" value="incorrect"> Condicional</label>
+        <div class="feedback" id="feedback2"></div>
       </div>
-
-      <!-- Pregunta 3 -->
+      
       <div class="question">
-        <p>3. ¿Qué implica la autorregulación del aprendizaje?</p>
-        <div class="options">
-          <label><input type="radio" name="q3" value="a"> Dejar que el docente tome todas las decisiones.</label>
-          <label><input type="radio" name="q3" value="b"> Gestionar, evaluar y ajustar de forma consciente el propio proceso de aprendizaje.</label>
-          <label><input type="radio" name="q3" value="c"> Memorizar todo el contenido de un curso.</label>
-        </div>
+        <h3>3. ¿Qué fase de la autorregulación implica implementar las estrategias planificadas?</h3>
+        <label><input type="radio" name="q3" value="incorrect"> Planificación</label>
+        <label><input type="radio" name="q3" value="correct"> Ejecución o desempeño</label>
+        <label><input type="radio" name="q3" value="incorrect"> Autorreflexión</label>
+        <div class="feedback" id="feedback3"></div>
       </div>
-
-      <!-- Pregunta 4 -->
+      
       <div class="question">
-        <p>4. ¿En qué fase de la autorregulación se reflexiona sobre los resultados obtenidos?</p>
-        <div class="options">
-          <label><input type="radio" name="q4" value="a"> Planificación.</label>
-          <label><input type="radio" name="q4" value="b"> Ejecución.</label>
-          <label><input type="radio" name="q4" value="c"> Autorreflexión.</label>
-        </div>
+        <h3>4. ¿Qué estrategia fomenta la metacognición?</h3>
+        <label><input type="radio" name="q4" value="correct"> Uso de diarios de aprendizaje para reflexionar sobre estrategias y resultados.</label>
+        <label><input type="radio" name="q4" value="incorrect"> Repetición mecánica de ejercicios.</label>
+        <label><input type="radio" name="q4" value="incorrect"> Aprender sin autoevaluarse.</label>
+        <div class="feedback" id="feedback4"></div>
       </div>
-
-      <!-- Pregunta 5 -->
+      
       <div class="question">
-        <p>5. ¿Por qué son importantes la metacognición y la autorregulación en la educación técnica?</p>
-        <div class="options">
-          <label><input type="radio" name="q5" value="a"> Porque permiten identificar estrategias de aprendizaje y adaptarse a cambios tecnológicos.</label>
-          <label><input type="radio" name="q5" value="b"> Porque evitan que los estudiantes tengan que estudiar.</label>
-          <label><input type="radio" name="q5" value="c"> Porque eliminan la necesidad de usar recursos digitales.</label>
-        </div>
+        <h3>5. ¿Por qué son importantes la metacognición y la autorregulación en la educación técnica?</h3>
+        <label><input type="radio" name="q5" value="incorrect"> Porque permiten aprender solo de memoria.</label>
+        <label><input type="radio" name="q5" value="correct"> Porque ayudan a adaptarse a nuevos lenguajes y herramientas tecnológicas.</label>
+        <label><input type="radio" name="q5" value="incorrect"> Porque reemplazan el rol del docente.</label>
+        <div class="feedback" id="feedback5"></div>
       </div>
-
-      <button type="button" onclick="checkAnswers()">Enviar respuestas</button>
+      
+      <button type="button" id="btnEnviar">Enviar respuestas</button>
     </form>
-
+    
     <div id="result"></div>
   </div>
 
   <script>
+    document.getElementById("btnEnviar").addEventListener("click", checkAnswers);
+
     function checkAnswers() {
-      const correctAnswers = {
-        q1: "b",
-        q2: "a",
-        q3: "b",
-        q4: "c",
-        q5: "a"
-      };
-
-      let score = 0;
       let total = 5;
-      let feedback = "";
+      let score = 0;
 
-      for (let q in correctAnswers) {
-        let selected = document.querySelector(`input[name="${q}"]:checked`);
-        if (selected) {
-          if (selected.value === correctAnswers[q]) {
+      for (let i = 1; i <= total; i++) {
+        let question = document.querySelector(`input[name="q${i}"]:checked`);
+        let feedback = document.getElementById(`feedback${i}`);
+        
+        if (question) {
+          if (question.value === "correct") {
             score++;
-            feedback += `<p class='correct'>✔ Pregunta ${q.slice(1)} correcta.</p>`;
+            feedback.textContent = "✅ ¡Correcto!";
+            feedback.className = "feedback correct";
           } else {
-            feedback += `<p class='incorrect'>✘ Pregunta ${q.slice(1)} incorrecta.</p>`;
+            feedback.textContent = "❌ Incorrecto. Revisa el contenido.";
+            feedback.className = "feedback incorrect";
           }
         } else {
-          feedback += `<p class='incorrect'>✘ Pregunta ${q.slice(1)} sin responder.</p>`;
+          feedback.textContent = "⚠️ No respondiste esta pregunta.";
+          feedback.className = "feedback incorrect";
         }
       }
 
-      let percentage = (score / total) * 100;
-      document.getElementById("result").innerHTML =
-        `<h3>Tu calificación: ${score}/${total} (${percentage.toFixed(0)}%)</h3>` + feedback;
+      let result = document.getElementById("result");
+      result.textContent = `Tu calificación final es: ${score} / ${total}`;
     }
   </script>
 </body>
