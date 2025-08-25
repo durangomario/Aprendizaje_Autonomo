@@ -2,220 +2,157 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Actividad: Aprendizaje Autónomo</title>
+  <title>Quiz: Metacognición y Autorregulación</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f3f4f6;
+      background: #f4f6f9;
       margin: 0;
-      padding: 0;
-      color: #1f2937;
-    }
-
-    header {
-      background: #2563eb;
-      color: white;
-      text-align: center;
       padding: 20px;
     }
-
-    section.actividad {
-      max-width: 850px;
-      background: white;
-      margin: 30px auto;
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
       padding: 25px;
       border-radius: 12px;
-      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
     }
-
-    h2 {
-      color: #1e40af;
-      margin-bottom: 15px;
+    h1 {
+      text-align: center;
+      color: #2c3e50;
     }
-
-    ol {
-      padding-left: 20px;
-    }
-
-    li {
+    .question {
       margin-bottom: 20px;
     }
-
-    ul {
-      list-style: none;
-      padding: 0;
+    .question h3 {
+      color: #34495e;
     }
-
-    ul li {
-      margin: 5px 0;
-    }
-
-    input[type="radio"] {
-      margin-right: 8px;
-    }
-
-    button {
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-size: 16px;
+    label {
+      display: block;
+      padding: 8px;
+      background: #ecf0f1;
+      margin: 6px 0;
+      border-radius: 6px;
       cursor: pointer;
-      margin-top: 15px;
+      transition: background 0.3s;
     }
-
-    button:hover {
-      background: #1d4ed8;
+    label:hover {
+      background: #dfe6e9;
     }
-
-    #resultado {
-      margin-top: 25px;
-      padding: 15px;
-      font-weight: bold;
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 12px 25px;
+      border: none;
+      background: #27ae60;
+      color: white;
       border-radius: 8px;
-      display: none;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
     }
-
-    .correcto {
-      background: #d1fae5;
-      color: #065f46;
-      border: 2px solid #10b981;
+    button:hover {
+      background: #219150;
     }
-
-    .incorrecto {
-      background: #fee2e2;
-      color: #991b1b;
-      border: 2px solid #ef4444;
-    }
-
     .feedback {
       margin-top: 10px;
-      padding: 10px;
-      border-radius: 6px;
-      font-size: 14px;
+      font-weight: bold;
     }
-
-    .feedback.correcto {
-      background: #ecfdf5;
-      border-left: 5px solid #10b981;
-      color: #065f46;
+    .correct {
+      color: green;
     }
-
-    .feedback.incorrecto {
-      background: #fef2f2;
-      border-left: 5px solid #ef4444;
-      color: #991b1b;
+    .incorrect {
+      color: red;
+    }
+    #result {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #2c3e50;
     }
   </style>
 </head>
 <body>
-
-  <header>
-    <h1>Actividad de Aprendizaje</h1>
-    <p>¿Qué es el Aprendizaje Autónomo?</p>
-  </header>
-
-  <section class="actividad">
-    <h2>📘 Responde las siguientes preguntas</h2>
-    <p>Marca la opción correcta en cada caso y al final verifica tus respuestas.</p>
-
-    <form id="quiz">
-      <ol>
-        <li>
-          <p><strong>1. ¿Qué significa Aprendizaje Autónomo?</strong></p>
-          <ul>
-            <li><label><input type="radio" name="p1" value="0"> Depender totalmente del docente para aprender.</label></li>
-            <li><label><input type="radio" name="p1" value="1"> Asumir la responsabilidad del propio aprendizaje.</label></li>
-            <li><label><input type="radio" name="p1" value="0"> Estudiar solo en espacios presenciales.</label></li>
-          </ul>
-        </li>
-
-        <li>
-          <p><strong>2. ¿Cuál de estas es una característica del Aprendizaje Autónomo?</strong></p>
-          <ul>
-            <li><label><input type="radio" name="p2" value="0"> La obligación de seguir un único método impuesto.</label></li>
-            <li><label><input type="radio" name="p2" value="1"> La motivación intrínseca del estudiante.</label></li>
-            <li><label><input type="radio" name="p2" value="0"> La ausencia de reflexión crítica.</label></li>
-          </ul>
-        </li>
-
-        <li>
-          <p><strong>3. ¿Por qué es importante el Aprendizaje Autónomo en el contexto actual?</strong></p>
-          <ul>
-            <li><label><input type="radio" name="p3" value="0"> Porque el docente no tiene ninguna responsabilidad.</label></li>
-            <li><label><input type="radio" name="p3" value="1"> Porque el mercado laboral exige profesionales que aprendan continuamente.</label></li>
-            <li><label><input type="radio" name="p3" value="0"> Porque reemplaza completamente la educación virtual.</label></li>
-          </ul>
-        </li>
-
-        <li>
-          <p><strong>4. ¿Cuál de las siguientes corresponde a una fase del Aprendizaje Autónomo?</strong></p>
-          <ul>
-            <li><label><input type="radio" name="p4" value="1"> Diagnóstico, objetivos, planificación, ejecución y evaluación.</label></li>
-            <li><label><input type="radio" name="p4" value="0"> Lectura, copia, memorización y examen.</label></li>
-            <li><label><input type="radio" name="p4" value="0"> Escuchar, repetir y olvidar.</label></li>
-          </ul>
-        </li>
-
-        <li>
-          <p><strong>5. En el Aprendizaje Autónomo, el rol principal del estudiante es:</strong></p>
-          <ul>
-            <li><label><input type="radio" name="p5" value="0"> Ser receptor pasivo de contenidos.</label></li>
-            <li><label><input type="radio" name="p5" value="1"> Tomar decisiones y gestionar su propio proceso de aprendizaje.</label></li>
-            <li><label><input type="radio" name="p5" value="0"> Depender exclusivamente de las instrucciones del docente.</label></li>
-          </ul>
-        </li>
-      </ol>
-
-      <button type="button" onclick="verificarRespuestas()">Verificar respuestas</button>
+  <div class="container">
+    <h1>Quiz: Metacognición y Autorregulación</h1>
+    <form id="quizForm">
+      
+      <div class="question">
+        <h3>1. ¿Qué es la metacognición?</h3>
+        <label><input type="radio" name="q1" value="correct"> Reflexionar sobre los propios procesos de pensamiento y aprendizaje.</label>
+        <label><input type="radio" name="q1" value="incorrect"> Memorizar información sin analizarla.</label>
+        <label><input type="radio" name="q1" value="incorrect"> Aplicar estrategias sin cuestionarlas.</label>
+        <div class="feedback" id="feedback1"></div>
+      </div>
+      
+      <div class="question">
+        <h3>2. ¿Cuál de los siguientes NO es un tipo de conocimiento metacognitivo?</h3>
+        <label><input type="radio" name="q2" value="incorrect"> Declarativo</label>
+        <label><input type="radio" name="q2" value="incorrect"> Procedimental</label>
+        <label><input type="radio" name="q2" value="correct"> Experimental</label>
+        <label><input type="radio" name="q2" value="incorrect"> Condicional</label>
+        <div class="feedback" id="feedback2"></div>
+      </div>
+      
+      <div class="question">
+        <h3>3. ¿Qué fase de la autorregulación implica implementar las estrategias planificadas?</h3>
+        <label><input type="radio" name="q3" value="incorrect"> Planificación</label>
+        <label><input type="radio" name="q3" value="correct"> Ejecución o desempeño</label>
+        <label><input type="radio" name="q3" value="incorrect"> Autorreflexión</label>
+        <div class="feedback" id="feedback3"></div>
+      </div>
+      
+      <div class="question">
+        <h3>4. ¿Qué estrategia fomenta la metacognición?</h3>
+        <label><input type="radio" name="q4" value="correct"> Uso de diarios de aprendizaje para reflexionar sobre estrategias y resultados.</label>
+        <label><input type="radio" name="q4" value="incorrect"> Repetición mecánica de ejercicios.</label>
+        <label><input type="radio" name="q4" value="incorrect"> Aprender sin autoevaluarse.</label>
+        <div class="feedback" id="feedback4"></div>
+      </div>
+      
+      <div class="question">
+        <h3>5. ¿Por qué son importantes la metacognición y la autorregulación en la educación técnica?</h3>
+        <label><input type="radio" name="q5" value="incorrect"> Porque permiten aprender solo de memoria.</label>
+        <label><input type="radio" name="q5" value="correct"> Porque ayudan a adaptarse a nuevos lenguajes y herramientas tecnológicas.</label>
+        <label><input type="radio" name="q5" value="incorrect"> Porque reemplazan el rol del docente.</label>
+        <div class="feedback" id="feedback5"></div>
+      </div>
+      
+      <button type="button" onclick="checkAnswers()">Enviar respuestas</button>
     </form>
-
-    <div id="resultado"></div>
-    <div id="detalles"></div>
-  </section>
+    
+    <div id="result"></div>
+  </div>
 
   <script>
-    const respuestasCorrectas = {
-      p1: "1",
-      p2: "1",
-      p3: "1",
-      p4: "1",
-      p5: "1"
-    };
-
-    function verificarRespuestas() {
-      let correctas = 0;
-      const total = Object.keys(respuestasCorrectas).length;
-      const form = document.forms["quiz"];
-      const detallesDiv = document.getElementById("detalles");
-      detallesDiv.innerHTML = ""; // limpiar antes de mostrar
+    function checkAnswers() {
+      let total = 5;
+      let score = 0;
 
       for (let i = 1; i <= total; i++) {
-        const pregunta = "p" + i;
-        const seleccionada = form[pregunta].value;
-
-        if (seleccionada === respuestasCorrectas[pregunta]) {
-          correctas++;
-          detallesDiv.innerHTML += `<div class="feedback correcto">✔️ Pregunta ${i}: Correcta</div>`;
+        let question = document.querySelector(`input[name="q${i}"]:checked`);
+        let feedback = document.getElementById(`feedback${i}`);
+        
+        if (question) {
+          if (question.value === "correct") {
+            score++;
+            feedback.textContent = "✅ ¡Correcto!";
+            feedback.className = "feedback correct";
+          } else {
+            feedback.textContent = "❌ Incorrecto. Revisa el contenido.";
+            feedback.className = "feedback incorrect";
+          }
         } else {
-          detallesDiv.innerHTML += `<div class="feedback incorrecto">❌ Pregunta ${i}: Incorrecta. La respuesta correcta era la opción ${respuestasCorrectas[pregunta]}.</div>`;
+          feedback.textContent = "⚠️ No respondiste esta pregunta.";
+          feedback.className = "feedback incorrect";
         }
       }
 
-      const resultado = document.getElementById("resultado");
-      resultado.style.display = "block";
-
-      if (correctas === total) {
-        resultado.className = "correcto";
-        resultado.textContent = "🎉 ¡Excelente! Has respondido correctamente todas las preguntas.";
-      } else {
-        resultado.className = "incorrecto";
-        resultado.textContent = `✅ Respuestas correctas: ${correctas} de ${total}. Revisa el detalle de tus errores abajo.`;
-      }
+      let result = document.getElementById("result");
+      result.textContent = `Tu calificación final es: ${score} / ${total}`;
     }
   </script>
-
 </body>
 </html>
