@@ -46,7 +46,7 @@
     <h1>Examen: Metacognición y Autorregulación</h1>
     <p class="sub">Selecciona una opción por pregunta. Al calificar, verás retroalimentación con una breve explicación.</p>
 
-    <form id="quiz" class="quiz">
+    <form id="quiz1" class="quiz1">
 
 <!-- P1 -->
 <div class="q" data-correct="b" data-explain="La metacognición es reflexionar sobre los propios procesos de pensamiento y aprendizaje.">
@@ -180,17 +180,17 @@
 
 <script>
 (function(){
-  const quiz = document.getElementById('quiz');
+  const quiz1 = document.getElementById('quiz1');
   const gradeBtn = document.getElementById('grade');
   const resetBtn = document.getElementById('reset');
   const scoreEl = document.getElementById('score');
 
   function grade(){
-    const questions = quiz.querySelectorAll('.q');
+    const questions = quiz1.querySelectorAll('.q');
     let correct = 0;
     questions.forEach((q, idx)=>{
       const name = 'q' + (idx+1);
-      const sel = quiz.querySelector('input[name="'+name+'"]:checked');
+      const sel = quiz1.querySelector('input[name="'+name+'"]:checked');
       const fb  = q.querySelector('.feedback');
       const correctVal = q.getAttribute('data-correct');
       const explain = q.getAttribute('data-explain') || '';
@@ -220,19 +220,19 @@
     scoreEl.textContent = 'Puntuación: ' + correct + ' / ' + questions.length + ' (' + Math.round(correct*100/questions.length) + '%)';
   }
 
-  function resetQuiz(){
-    quiz.reset();
+  function resetQuiz1(){
+    quiz1.reset();
     scoreEl.textContent = '';
-    quiz.querySelectorAll('.feedback').forEach(fb=>{
+    quiz1.querySelectorAll('.feedback').forEach(fb=>{
       fb.style.display = 'none';
       fb.classList.remove('ok','bad');
       fb.textContent = '';
     });
-    quiz.querySelectorAll('.mark').forEach(m=>m.remove());
+    quiz1.querySelectorAll('.mark').forEach(m=>m.remove());
   }
 
   gradeBtn.addEventListener('click', grade);
-  resetBtn.addEventListener('click', resetQuiz);
+  resetBtn.addEventListener('click', resetQuiz1);
 })();
 </script>
 </body>
