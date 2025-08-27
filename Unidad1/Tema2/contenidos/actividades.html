@@ -1,159 +1,179 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Metacognición y Autorregulación</title>
-  <style>
-    body {
-      font-family: system-ui, sans-serif;
-      background: #f9fafb;
-      margin: 0;
-      padding: 20px;
-      color: #1f2937;
-    }
-
-    .quiz {
-      max-width: 900px;
-      margin: auto;
-      display: grid;
-      gap: 24px;
-    }
-
-    .q {
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 20px;
-    }
-
-    .q h3 {
-      margin-top: 0;
-    }
-
-    .opt {
-      display: block;
-      margin: 8px 0;
-      padding: 10px;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .opt:hover {
-      background: #f3f4f6;
-    }
-
-    input[type="radio"] {
-      display: none;
-    }
-
-    .feedback {
-      display: none;
-      padding: 12px;
-      margin-top: 10px;
-      border-radius: 8px;
-      font-size: 14px;
-    }
-
-    .ok {
-      background: #dcfce7;
-      border: 1px solid #86efac;
-      color: #166534;
-    }
-
-    .bad {
-      background: #fee2e2;
-      border: 1px solid #fca5a5;
-      color: #991b1b;
-    }
-
-    /* Mostrar feedback cuando se selecciona una opción específica */
-    input[value="b"]:checked ~ .feedback.ok-b,
-    input[value="c"]:checked ~ .feedback.ok-c,
-    input[value="a"]:checked ~ .feedback.ok-a,
-    input[value="d"]:checked ~ .feedback.ok-d {
-      display: block;
-    }
-
-    input:not([value="b"]):checked ~ .feedback.bad-b,
-    input:not([value="c"]):checked ~ .feedback.bad-c,
-    input:not([value="a"]):checked ~ .feedback.bad-a,
-    input:not([value="d"]):checked ~ .feedback.bad-d {
-      display: block;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Examen: Metacognición y Autorregulación (10 preguntas)</title>
+<style>
+  :root{
+    --bg:#f3f4f6; --card:#ffffff; --ink:#1f2937; --muted:#4b5563;
+    --accent:#2563eb; --bad:#dc2626; --good:#059669; --warn:#d97706;
+  }
+  body{margin:0; background:var(--bg); font-family:system-ui; color:var(--ink);}
+  .wrap{max-width:920px; margin:24px auto; padding:24px;}
+  .hero{background:var(--card); border:1px solid #e5e7eb; padding:24px;
+    border-radius:16px; box-shadow:0 6px 20px rgba(0,0,0,.05);}
+  h1{margin:0 0 6px; font-size:clamp(22px,3vw,28px);}
+  .sub{color:var(--muted); margin:0 0 12px; font-size:14px}
+  .badge{display:inline-block; background:var(--accent); color:white;
+    padding:4px 10px; border-radius:999px; font-size:12px;}
+  .quiz{margin-top:16px; display:grid; gap:16px;}
+  .q{background:#f9fafb; border:1px solid #e5e7eb; border-radius:14px; padding:18px;}
+  .q h3{margin:0 0 10px; font-size:18px;}
+  .opts{display:grid; gap:8px; margin-top:6px}
+  .opt{display:flex; gap:10px; align-items:flex-start; padding:10px 12px;
+    border-radius:10px; border:1px solid #e5e7eb; background:white; cursor:pointer;}
+  .opt:hover{border-color:var(--accent); background:#eff6ff}
+  .feedback{display:none; margin-top:10px; font-size:14px; line-height:1.4; padding:10px 12px; border-radius:10px;}
+  .feedback.ok{background:#dcfce7; border:1px solid #86efac; color:var(--good)}
+  .feedback.bad{background:#fee2e2; border:1px solid #fca5a5; color:var(--bad)}
+  .actions{display:flex; gap:10px; margin-top:18px; flex-wrap:wrap;}
+  button{appearance:none; border:none; cursor:pointer; padding:12px 16px;
+    border-radius:12px; font-weight:600; background:var(--accent); color:white;}
+  button.secondary{background:#f3f4f6; color:var(--ink); border:1px solid #d1d5db;}
+  .score{margin-top:14px; font-weight:700; font-size:16px;}
+  .legend{margin-top:6px; color:var(--muted); font-size:13px;}
+  .required{color:var(--warn); font-weight:600}
+  .mark{display:inline-block; margin-left:8px; padding:2px 8px; border-radius:999px; font-size:12px; font-weight:700;}
+  .mark.ok{background:#dcfce7; color:var(--good)}
+  .mark.bad{background:#fee2e2; color:var(--bad)}
+</style>
 </head>
 <body>
+<div class="wrap">
+  <div class="hero">
+    <span class="badge">Evaluación</span>
+    <h1>Examen: Metacognición y Autorregulación</h1>
+    <p class="sub">Selecciona una opción por pregunta. Al calificar, verás retroalimentación con una breve explicación.</p>
 
-<div class="quiz">
+    <form id="quiz" class="quiz">
 
-  <!-- P1 -->
-  <div class="q">
-    <h3>1) ¿Qué describe mejor el concepto de metacognición?</h3>
-    <label class="opt"><input type="radio" name="q1" value="a"> Memorizar datos sin comprensión.</label>
-    <label class="opt"><input type="radio" name="q1" value="b"> Reflexionar sobre los propios procesos de pensamiento y aprendizaje.</label>
-    <label class="opt"><input type="radio" name="q1" value="c"> Realizar actividades mecánicas sin planificación.</label>
-    <label class="opt"><input type="radio" name="q1" value="d"> Seguir instrucciones sin autonomía.</label>
-    <input type="radio" name="q1" value="b" />
-    <div class="feedback ok ok-b">✅ ¡Correcto! Implica pensar sobre cómo se piensa y aprende.</div>
-    <input type="radio" name="q1" value="a" />
-    <div class="feedback bad bad-b">❌ Incorrecto. Memorizar no es reflexionar.</div>
+      <!-- P11 -->
+<div class="q" data-correct="b" data-explain="La metacognición es 'pensar sobre cómo se piensa', es decir, reflexionar y monitorear los propios procesos de pensamiento y aprendizaje.">
+  <h3>11) ¿Qué significa metacognición?</h3>
+  <div class="opts">
+    <label class="opt"><input type="radio" name="q11" value="a"> Memorizar sin razonar sobre lo aprendido.</label>
+    <label class="opt"><input type="radio" name="q11" value="b"> Reflexionar sobre cómo se piensa y aprende.</label>
+    <label class="opt"><input type="radio" name="q11" value="c"> Aplicar estrategias sin cuestionar resultados.</label>
+    <label class="opt"><input type="radio" name="q11" value="d"> Repetir ejercicios mecánicamente.</label>
   </div>
-
-  <!-- P2 -->
-  <div class="q">
-    <h3>2) ¿Qué es el conocimiento condicional?</h3>
-    <label class="opt"><input type="radio" name="q2" value="a"> Saber cómo aplicar una estrategia.</label>
-    <label class="opt"><input type="radio" name="q2" value="b"> Conocer solo las debilidades cognitivas.</label>
-    <label class="opt"><input type="radio" name="q2" value="c"> Saber cuándo y por qué aplicar una estrategia.</label>
-    <label class="opt"><input type="radio" name="q2" value="d"> Memorizar contenido sin reflexionar.</label>
-    <input type="radio" name="q2" value="c" />
-    <div class="feedback ok ok-c">✅ ¡Correcto! Es el conocimiento de cuándo y por qué usar estrategias.</div>
-    <input type="radio" name="q2" value="a" />
-    <div class="feedback bad bad-c">❌ Incorrecto. Eso corresponde al conocimiento procedimental.</div>
-  </div>
-
-  <!-- P3 -->
-  <div class="q">
-    <h3>3) ¿Qué se realiza en la fase de planificación del aprendizaje autorregulado?</h3>
-    <label class="opt"><input type="radio" name="q3" value="a"> Establecer metas, elegir estrategias y organizar recursos.</label>
-    <label class="opt"><input type="radio" name="q3" value="b"> Ejecutar tareas sin preparación.</label>
-    <label class="opt"><input type="radio" name="q3" value="c"> Evaluar el desempeño final.</label>
-    <label class="opt"><input type="radio" name="q3" value="d"> Esperar instrucciones externas.</label>
-    <input type="radio" name="q3" value="a" />
-    <div class="feedback ok ok-a">✅ ¡Correcto! Esa es la fase de planificación.</div>
-    <input type="radio" name="q3" value="b" />
-    <div class="feedback bad bad-a">❌ Incorrecto. La fase de planificación implica preparación anticipada.</div>
-  </div>
-
-  <!-- P4 -->
-  <div class="q">
-    <h3>4) ¿Cuál acción corresponde a la fase de autorreflexión?</h3>
-    <label class="opt"><input type="radio" name="q4" value="a"> Establecer metas para una nueva unidad.</label>
-    <label class="opt"><input type="radio" name="q4" value="b"> Memorizar información sin análisis.</label>
-    <label class="opt"><input type="radio" name="q4" value="c"> Ejecutar estrategias sin supervisión.</label>
-    <label class="opt"><input type="radio" name="q4" value="d"> Evaluar resultados y planear mejoras.</label>
-    <input type="radio" name="q4" value="d" />
-    <div class="feedback ok ok-d">✅ ¡Correcto! Evaluar y mejorar es parte de la autorreflexión.</div>
-    <input type="radio" name="q4" value="a" />
-    <div class="feedback bad bad-d">❌ Incorrecto. Esa acción ocurre en la planificación.</div>
-  </div>
-
-  <!-- P5 -->
-  <div class="q">
-    <h3>5) ¿Cuál estrategia fomenta la metacognición?</h3>
-    <label class="opt"><input type="radio" name="q5" value="a"> Repetir sin entender.</label>
-    <label class="opt"><input type="radio" name="q5" value="b"> Escribir bitácoras de aprendizaje y reflexionar sobre lo aprendido.</label>
-    <label class="opt"><input type="radio" name="q5" value="c"> Memorizar listas sin relación entre conceptos.</label>
-    <label class="opt"><input type="radio" name="q5" value="d"> Realizar tareas sin planificación.</label>
-    <input type="radio" name="q5" value="b" />
-    <div class="feedback ok ok-b">✅ ¡Correcto! Las bitácoras ayudan a reflexionar sobre el proceso de aprendizaje.</div>
-    <input type="radio" name="q5" value="a" />
-    <div class="feedback bad bad-b">❌ Incorrecto. Repetir sin reflexión no favorece la metacognición.</div>
-  </div>
-
+  <div class="feedback"></div>
 </div>
+
+<!-- P12 -->
+<div class="q" data-correct="c" data-explain="El conocimiento condicional es saber cuándo y por qué aplicar una estrategia, dependiendo del contexto.">
+  <h3>12) ¿Cuál de los siguientes ejemplos corresponde al conocimiento condicional?</h3>
+  <div class="opts">
+    <label class="opt"><input type="radio" name="q12" value="a"> Reconocer mis fortalezas y debilidades.</label>
+    <label class="opt"><input type="radio" name="q12" value="b"> Conocer los pasos de un algoritmo.</label>
+    <label class="opt"><input type="radio" name="q12" value="c"> Decidir usar mapas conceptuales para un tema complejo.</label>
+    <label class="opt"><input type="radio" name="q12" value="d"> Memorizar fórmulas sin analizar su utilidad.</label>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P13 -->
+<div class="q" data-correct="a" data-explain="La fase de planificación implica establecer metas claras, seleccionar estrategias y organizar recursos antes de actuar.">
+  <h3>13) ¿Qué se realiza en la fase de planificación dentro de la autorregulación del aprendizaje?</h3>
+  <div class="opts">
+    <label class="opt"><input type="radio" name="q13" value="a"> Definir metas y elegir estrategias adecuadas.</label>
+    <label class="opt"><input type="radio" name="q13" value="b"> Implementar directamente lo planificado.</label>
+    <label class="opt"><input type="radio" name="q13" value="c"> Evaluar los resultados después de estudiar.</label>
+    <label class="opt"><input type="radio" name="q13" value="d"> Evitar organizar el tiempo disponible.</label>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P14 -->
+<div class="q" data-correct="d" data-explain="Llevar un diario o bitácora de aprendizaje permite reflexionar sobre estrategias, errores y mejoras, fomentando la metacognición.">
+  <h3>14) ¿Qué estrategia fomenta directamente la metacognición?</h3>
+  <div class="opts">
+    <label class="opt"><input type="radio" name="q14" value="a"> Estudiar sin reflexionar.</label>
+    <label class="opt"><input type="radio" name="q14" value="b"> Memorizar listados extensos.</label>
+    <label class="opt"><input type="radio" name="q14" value="c"> Seguir instrucciones sin adaptación.</label>
+    <label class="opt"><input type="radio" name="q14" value="d"> Usar un diario de aprendizaje para registrar avances.</label>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P15 -->
+<div class="q" data-correct="b" data-explain="En educación técnica, la metacognición y autorregulación ayudan a adaptarse a nuevas tecnologías y resolver problemas complejos de manera autónoma.">
+  <h3>15) ¿Por qué son esenciales la metacognición y la autorregulación en la educación técnica profesional?</h3>
+  <div class="opts">
+    <label class="opt"><input type="radio" name="q15" value="a"> Porque permiten memorizar códigos sin analizarlos.</label>
+    <label class="opt"><input type="radio" name="q15" value="b"> Porque facilitan la adaptación continua a nuevas tecnologías y estrategias de aprendizaje.</label>
+    <label class="opt"><input type="radio" name="q15" value="c"> Porque evitan la práctica autónoma.</label>
+    <label class="opt"><input type="radio" name="q15" value="d"> Porque eliminan la necesidad de reflexionar.</label>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+      <div class="actions">
+        <button type="button" id="grade">Calificar</button>
+        <button type="button" class="secondary" id="reset">Reiniciar</button>
+        <span id="score" class="score muted"></span>
+      </div>
+      <div class="legend">⚠️ <span class="required">Si alguna pregunta no tiene respuesta seleccionada, contará como incorrecta.</span></div>
+    </form>
+  </div>
+</div>
+
+<script>
+(function(){
+  const quiz = document.getElementById('quiz');
+  const gradeBtn = document.getElementById('grade');
+  const resetBtn = document.getElementById('reset');
+  const scoreEl = document.getElementById('score');
+
+  function grade(){
+    const questions = quiz.querySelectorAll('.q');
+    let correct = 0;
+    questions.forEach((q, idx)=>{
+      const name = 'q' + (idx+1);
+      const sel = quiz.querySelector('input[name="'+name+'"]:checked');
+      const fb  = q.querySelector('.feedback');
+      const correctVal = q.getAttribute('data-correct');
+      const explain = q.getAttribute('data-explain') || '';
+
+      fb.classList.remove('ok','bad');
+      fb.style.display = 'block';
+      const oldMark = q.querySelector('.mark');
+      if(oldMark){ oldMark.remove(); }
+
+      if(sel && sel.value === correctVal){
+        correct++;
+        fb.classList.add('ok');
+        fb.textContent = '✅ ¡Correcto! ' + explain;
+        const chip = document.createElement('span');
+        chip.className = 'mark ok';
+        chip.textContent = '✓';
+        q.querySelector('h3').appendChild(chip);
+      }else{
+        fb.classList.add('bad');
+        fb.textContent = '❌ Incorrecto. ' + explain;
+        const chip = document.createElement('span');
+        chip.className = 'mark bad';
+        chip.textContent = '×';
+        q.querySelector('h3').appendChild(chip);
+      }
+    });
+    scoreEl.textContent = 'Puntuación: ' + correct + ' / ' + questions.length + ' (' + Math.round(correct*100/questions.length) + '%)';
+  }
+
+  function resetQuiz(){
+    quiz.reset();
+    scoreEl.textContent = '';
+    quiz.querySelectorAll('.feedback').forEach(fb=>{
+      fb.style.display = 'none';
+      fb.classList.remove('ok','bad');
+      fb.textContent = '';
+    });
+    quiz.querySelectorAll('.mark').forEach(m=>m.remove());
+  }
+
+  gradeBtn.addEventListener('click', grade);
+  resetBtn.addEventListener('click', resetQuiz);
+})();
+</script>
 </body>
 </html>
