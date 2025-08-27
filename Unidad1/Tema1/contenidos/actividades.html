@@ -1,140 +1,236 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Quiz - Aprendizaje Autónomo</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Actividad: Aprendizaje Autónomo (5 preguntas)</title>
   <style>
-    body { font-family: Arial, sans-serif; line-height: 1.6; }
-    .quiz-container { max-width: 800px; margin: auto; padding: 20px; border: 2px solid #ccc; border-radius: 10px; }
-    h2 { color: #2a6fdb; }
-    .question { margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; }
-    .feedback { font-weight: bold; margin-top: 5px; }
-    .correct { color: green; }
-    .incorrect { color: red; }
-    .buttons { margin-top: 20px; }
-    button { padding: 10px 15px; margin-right: 10px; border: none; border-radius: 5px; cursor: pointer; }
-    #gradeBtn { background: #2a6fdb; color: #fff; }
-    #resetBtn { background: #888; color: #fff; }
-    #resultMessage { margin-top: 20px; font-size: 18px; font-weight: bold; }
+    :root{
+      --bg:#f3f4f6;
+      --card:#ffffff;
+      --ink:#0f172a;
+      --muted:#475569;
+      --accent:#2563eb;
+      --good:#059669;
+      --bad:#dc2626;
+      --warn:#d97706;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:var(--ink); -webkit-font-smoothing:antialiased;}
+    .container{max-width:980px; margin:28px auto; padding:20px;}
+    .card{background:var(--card); border:1px solid #e6edf3; border-radius:14px; padding:22px; box-shadow:0 10px 30px rgba(2,6,23,0.06);}
+    .header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px;}
+    .title{font-size:20px; font-weight:800; color:var(--accent);}
+    .subtitle{color:var(--muted); font-size:13px;}
+    .questions{display:grid; gap:14px; margin-top:12px;}
+    .q{
+      border-radius:12px; padding:14px; background:#fbfdff; border:1px solid #eef2ff;
+      display:block;
+    }
+    .q h4{margin:0 0 10px; font-size:16px;}
+    .opts{display:grid; gap:8px}
+    .opt{
+      display:flex; align-items:flex-start; gap:10px; padding:10px 12px; border-radius:10px;
+      border:1px solid #e6eefc; background:#fff; cursor:pointer; transition:all .12s ease;
+    }
+    .opt:hover{transform:translateY(-3px); box-shadow:0 8px 20px rgba(37,99,235,0.06)}
+    .opt input{margin-top:3px}
+    .feedback{margin-top:10px; font-size:14px; display:none; padding:10px; border-radius:8px;}
+    .feedback.ok{background:#ecfdf5; border:1px solid #bbf7d0; color:var(--good); display:block;}
+    .feedback.bad{background:#fff1f2; border:1px solid #fecaca; color:var(--bad); display:block;}
+    .actions{display:flex; gap:12px; align-items:center; margin-top:16px; flex-wrap:wrap;}
+    button{
+      appearance:none; border:none; cursor:pointer; padding:10px 14px; border-radius:10px; font-weight:700;
+      color:white; background:var(--accent); box-shadow:0 10px 24px rgba(37,99,235,0.18);
+    }
+    button.secondary{background:#f3f4f6; color:var(--ink); box-shadow:none; border:1px solid #d1d5db;}
+    .result{margin-top:12px; font-weight:800; font-size:15px;}
+    .legend{margin-top:8px; color:var(--muted); font-size:13px;}
+    .solution{margin-top:16px; padding:12px; background:linear-gradient(90deg,#ecfdf5,#eff6ff); border-radius:10px; border:1px solid #e6f4ea; display:flex; justify-content:space-between; align-items:center;}
+    @media (max-width:640px){ .header{flex-direction:column; align-items:flex-start;} }
   </style>
 </head>
 <body>
+  <div class="container">
+    <div class="card" role="application" aria-label="Autoevaluación Aprendizaje Autónomo">
+      <div class="header">
+        <div>
+          <div class="title">Actividad: Aprendizaje Autónomo</div>
+          <div class="subtitle">Autoevaluación interactiva — selecciona una respuesta por pregunta y pulsa "Calificar".</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:13px; color:var(--muted)">Tema: Aprendizaje Autónomo</div>
+          <div style="font-size:12px; color:#94a3b8; margin-top:6px">5 preguntas · Autoevaluación</div>
+        </div>
+      </div>
 
-<div class="quiz-container">
-  <h2>Autoevaluación: Aprendizaje Autónomo</h2>
-  <form id="quizActividades">
+      <div class="questions" id="quizArea">
 
-    <!-- Pregunta 1 -->
-    <div class="question">
-      <p>1) ¿Qué significa Aprendizaje Autónomo?</p>
-      <label><input type="radio" name="q1" value="a"> Depender del docente para adquirir conocimiento.</label><br>
-      <label><input type="radio" name="q1" value="b"> Proceso en el que la persona asume la responsabilidad de su propio aprendizaje.</label><br>
-      <label><input type="radio" name="q1" value="c"> Repetir contenidos sin reflexión crítica.</label>
-      <div class="feedback" id="feedback1"></div>
+        <!-- Q1 -->
+        <div class="q" data-correct="b" data-explain="El Aprendizaje Autónomo implica asumir la responsabilidad completa: diagnóstico, objetivos, selección de recursos y evaluación.">
+          <h4>1) ¿Qué significa Aprendizaje Autónomo?</h4>
+          <div class="opts" role="radiogroup" aria-labelledby="q1">
+            <label class="opt"><input type="radio" name="q1" value="a"> Depender del docente para adquirir conocimiento.</label>
+            <label class="opt"><input type="radio" name="q1" value="b"> Proceso en el que la persona asume la responsabilidad de su propio aprendizaje (diagnóstico, objetivos, estrategias, recursos y evaluación).</label>
+            <label class="opt"><input type="radio" name="q1" value="c"> Repetir contenidos sin reflexión crítica.</label>
+          </div>
+          <div class="feedback" aria-live="polite"></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="q" data-correct="c" data-explain="Knowles plantea que los adultos aprenden mejor cuando son autodirigidos y participan activamente en su educación.">
+          <h4>2) Según Malcolm Knowles, los estudiantes adultos…</h4>
+          <div class="opts" role="radiogroup" aria-labelledby="q2">
+            <label class="opt"><input type="radio" name="q2" value="a"> Dependen totalmente de la evaluación externa.</label>
+            <label class="opt"><input type="radio" name="q2" value="b"> Aprenden solo con clases magistrales.</label>
+            <label class="opt"><input type="radio" name="q2" value="c"> Tienen una necesidad natural de ser autodirigidos y aprender activamente.</label>
+          </div>
+          <div class="feedback" aria-live="polite"></div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="q" data-correct="b" data-explain="La autogestión (organizar tiempo, recursos y espacio) y la motivación intrínseca son características centrales del enfoque.">
+          <h4>3) ¿Cuál es una característica del Aprendizaje Autónomo?</h4>
+          <div class="opts" role="radiogroup" aria-labelledby="q3">
+            <label class="opt"><input type="radio" name="q3" value="a"> Seguir siempre un horario impuesto externamente.</label>
+            <label class="opt"><input type="radio" name="q3" value="b"> Autogestión del tiempo, espacio y recursos; motivación intrínseca y autorreflexión.</label>
+            <label class="opt"><input type="radio" name="q3" value="c"> Evitar el pensamiento crítico para avanzar más rápido.</label>
+          </div>
+          <div class="feedback" aria-live="polite"></div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="q" data-correct="a" data-explain="Las fases incluyen diagnóstico de necesidades, formulación de objetivos, planificación, ejecución y evaluación.">
+          <h4>4) ¿Cuál de las siguientes pertenece a las fases del Aprendizaje Autónomo?</h4>
+          <div class="opts" role="radiogroup" aria-labelledby="q4">
+            <label class="opt"><input type="radio" name="q4" value="a"> Formulación de objetivos claros, medibles y alcanzables.</label>
+            <label class="opt"><input type="radio" name="q4" value="b"> Copiar apuntes de otro compañero sin analizarlos.</label>
+            <label class="opt"><input type="radio" name="q4" value="c"> Evitar la planificación del proceso para ser “flexible”.</label>
+          </div>
+          <div class="feedback" aria-live="polite"></div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="q" data-correct="b" data-explain="Entre los beneficios está el desarrollo de habilidades transferibles como autorregulación, autodisciplina y planificación.">
+          <h4>5) ¿Cuál es un beneficio directo del Aprendizaje Autónomo?</h4>
+          <div class="opts" role="radiogroup" aria-labelledby="q5">
+            <label class="opt"><input type="radio" name="q5" value="a"> Evitar la evaluación personal del progreso.</label>
+            <label class="opt"><input type="radio" name="q5" value="b"> Desarrollo de habilidades transferibles: autorregulación, autodisciplina y planificación.</label>
+            <label class="opt"><input type="radio" name="q5" value="c"> Dependencia creciente del docente para avanzar.</label>
+          </div>
+          <div class="feedback" aria-live="polite"></div>
+        </div>
+
+      </div>
+
+      <div class="actions" role="region" aria-label="Controles">
+        <button type="button" id="gradeBtn">Calificar</button>
+        <button type="button" id="resetBtn" class="secondary">Reiniciar</button>
+        <div id="result" class="result" aria-live="polite" style="margin-left:auto;"></div>
+      </div>
+
+      <div class="legend">⚠️ Si alguna pregunta no tiene respuesta, contará como incorrecta.</div>
+
+      <div class="solution" aria-hidden="false">
+        <div style="font-weight:700;">Solucionario</div>
+        <div style="opacity:.95; font-size:14px;">1: b • 2: c • 3: b • 4: a • 5: b</div>
+      </div>
+
     </div>
+  </div>
 
-    <!-- Pregunta 2 -->
-    <div class="question">
-      <p>2) ¿Cuál de las siguientes es una característica del Aprendizaje Autónomo?</p>
-      <label><input type="radio" name="q2" value="a"> Seguir siempre un horario impuesto.</label><br>
-      <label><input type="radio" name="q2" value="b"> Autogestión del tiempo, espacio y recursos.</label><br>
-      <label><input type="radio" name="q2" value="c"> Evitar la autorreflexión y el pensamiento crítico.</label>
-      <div class="feedback" id="feedback2"></div>
-    </div>
+  <script>
+    (function(){
+      const quizArea = document.getElementById('quizArea');
+      const gradeBtn = document.getElementById('gradeBtn');
+      const resetBtn = document.getElementById('resetBtn');
+      const resultEl = document.getElementById('result');
 
-    <!-- Pregunta 3 -->
-    <div class="question">
-      <p>3) Según Malcolm Knowles, ¿qué necesitan los estudiantes adultos?</p>
-      <label><input type="radio" name="q3" value="a"> Ser autodirigidos y participar activamente en su proceso educativo.</label><br>
-      <label><input type="radio" name="q3" value="b"> Recibir instrucciones constantes del docente.</label><br>
-      <label><input type="radio" name="q3" value="c"> Limitarse a memorizar información.</label>
-      <div class="feedback" id="feedback3"></div>
-    </div>
+      function grade(){
+        const questions = quizArea.querySelectorAll('.q');
+        let correct = 0;
+        questions.forEach((q)=>{
+          const name = q.querySelector('input[type="radio"]')?.name;
+          const selected = q.querySelector('input[name="'+name+'"]:checked');
+          const correctVal = q.getAttribute('data-correct');
+          const explain = q.getAttribute('data-explain') || '';
+          const fb = q.querySelector('.feedback');
 
-    <!-- Pregunta 4 -->
-    <div class="question">
-      <p>4) ¿Cuál es una fase del Aprendizaje Autónomo?</p>
-      <label><input type="radio" name="q4" value="a"> Diagnóstico de necesidades de aprendizaje.</label><br>
-      <label><input type="radio" name="q4" value="b"> Copiar apuntes de otro compañero.</label><br>
-      <label><input type="radio" name="q4" value="c"> Evitar la planificación del tiempo.</label>
-      <div class="feedback" id="feedback4"></div>
-    </div>
+          // reset feedback classes
+          fb.classList.remove('ok','bad');
+          fb.style.display = 'none';
+          fb.textContent = '';
 
-    <!-- Pregunta 5 -->
-    <div class="question">
-      <p>5) ¿Cuál es un beneficio directo del Aprendizaje Autónomo?</p>
-      <label><input type="radio" name="q5" value="a"> Evitar la evaluación personal del progreso.</label><br>
-      <label><input type="radio" name="q5" value="b"> Desarrollar habilidades transferibles como la autorregulación y la autodisciplina.</label><br>
-      <label><input type="radio" name="q5" value="c"> Depender más del docente para avanzar.</label>
-      <div class="feedback" id="feedback5"></div>
-    </div>
+          if(selected && selected.value === correctVal){
+            correct++;
+            fb.classList.add('ok');
+            fb.textContent = '✅ Correcto. ' + explain;
+            fb.style.display = 'block';
+          } else if(selected && selected.value !== correctVal){
+            fb.classList.add('bad');
+            fb.textContent = '❌ Incorrecto. ' + explain;
+            fb.style.display = 'block';
+          } else {
+            fb.classList.add('bad');
+            fb.textContent = '⚠️ No respondiste esta pregunta. ' + explain;
+            fb.style.display = 'block';
+          }
+        });
 
-    <div class="buttons">
-      <button type="button" id="gradeBtn">Calificar</button>
-      <button type="button" id="resetBtn">Reiniciar</button>
-    </div>
-  </form>
+        const total = questions.length;
+        const pct = Math.round((correct / total) * 100);
+        resultEl.textContent = `Puntuación: ${correct} / ${total} — ${pct}%`;
 
-  <div id="resultMessage"></div>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function(){
-  const quiz = document.getElementById("quizActividades");
-  const gradeBtn = document.getElementById("gradeBtn");
-  const resetBtn = document.getElementById("resetBtn");
-  const resultMessage = document.getElementById("resultMessage");
-
-  const answers = {
-    q1: "b",
-    q2: "b",
-    q3: "a",
-    q4: "a",
-    q5: "b"
-  };
-
-  gradeBtn.addEventListener("click", function(){
-    let score = 0;
-    let total = Object.keys(answers).length;
-
-    for (let key in answers) {
-      let selected = quiz.querySelector('input[name="'+key+'"]:checked');
-      let feedback = document.getElementById("feedback"+key.slice(1));
-      if (selected) {
-        if (selected.value === answers[key]) {
-          score++;
-          feedback.textContent = "✅ Correcto";
-          feedback.className = "feedback correct";
+        if(pct === 100){
+          resultEl.style.color = 'var(--good)';
+          resultEl.textContent += ' · 🎉 ¡Excelente!';
+        } else if(pct >= 60){
+          resultEl.style.color = '#b45309';
+          resultEl.textContent += ' · 👍 Buen trabajo.';
         } else {
-          feedback.textContent = "❌ Incorrecto";
-          feedback.className = "feedback incorrect";
+          resultEl.style.color = 'var(--bad)';
+          resultEl.textContent += ' · 😟 Revisa el tema y vuelve a intentarlo.';
         }
-      } else {
-        feedback.textContent = "⚠️ No respondiste esta pregunta";
-        feedback.className = "feedback incorrect";
       }
-    }
 
-    // Mensaje final
-    if (score === total) {
-      resultMessage.textContent = "🎉 ¡Excelente! Respondiste todo correctamente.";
-      resultMessage.style.color = "green";
-    } else if (score >= total * 0.6) {
-      resultMessage.textContent = "👍 Buen trabajo, obtuviste " + score + " de " + total + ". Sigue mejorando.";
-      resultMessage.style.color = "orange";
-    } else {
-      resultMessage.textContent = "😟 Obtuviste " + score + " de " + total + ". Revisa el tema y vuelve a intentarlo.";
-      resultMessage.style.color = "red";
-    }
-  });
+      function resetQuiz(){
+        quizArea.querySelectorAll('input[type="radio"]').forEach(i=> i.checked = false);
+        quizArea.querySelectorAll('.feedback').forEach(fb=> { fb.textContent=''; fb.style.display='none'; fb.classList.remove('ok','bad'); });
+        resultEl.textContent = '';
+      }
 
-  resetBtn.addEventListener("click", function(){
-    quiz.reset();
-    document.querySelectorAll(".feedback").forEach(el => el.textContent = "");
-    resultMessage.textContent = "";
-  });
-});
-</script>
+      gradeBtn.addEventListener('click', function(e){
+        e.preventDefault && e.preventDefault();
+        grade();
+      });
 
+      resetBtn.addEventListener('click', function(e){
+        e.preventDefault && e.preventDefault();
+        resetQuiz();
+      });
+
+      // allow clicking the whole option area to check radio (progressive enhancement)
+      quizArea.querySelectorAll('.opt').forEach(opt => {
+        opt.addEventListener('click', function(e){
+          const radio = this.querySelector('input[type="radio"]');
+          if(radio) radio.checked = true;
+        });
+      });
+
+      // keyboard accessibility: allow Enter on focused .opt
+      quizArea.querySelectorAll('.opt').forEach(opt => {
+        opt.setAttribute('tabindex','0');
+        opt.addEventListener('keydown', function(e){
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            const radio = this.querySelector('input[type="radio"]');
+            if(radio) radio.checked = true;
+            this.click();
+          }
+        });
+      });
+
+    })();
+  </script>
 </body>
 </html>
