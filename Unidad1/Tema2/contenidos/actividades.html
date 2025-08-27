@@ -79,54 +79,76 @@
 </head>
 <body>
   <div class="container">
+
     <h1>Quiz: Metacognición y Autorregulación</h1>
     <form id="quizForm" onsubmit="return false;">
       
-      <div class="question">
-        <h3>1. ¿Qué es la metacognición?</h3>
-        <label><input type="radio" name="q1" value="correct"> Reflexionar sobre los propios procesos de pensamiento y aprendizaje.</label>
-        <label><input type="radio" name="q1" value="incorrect"> Memorizar información sin analizarla.</label>
-        <label><input type="radio" name="q1" value="incorrect"> Aplicar estrategias sin cuestionarlas.</label>
-        <div class="feedback" id="feedback1"></div>
-      </div>
-      
-      <div class="question">
-        <h3>2. ¿Cuál de los siguientes NO es un tipo de conocimiento metacognitivo?</h3>
-        <label><input type="radio" name="q2" value="incorrect"> Declarativo</label>
-        <label><input type="radio" name="q2" value="incorrect"> Procedimental</label>
-        <label><input type="radio" name="q2" value="correct"> Experimental</label>
-        <label><input type="radio" name="q2" value="incorrect"> Condicional</label>
-        <div class="feedback" id="feedback2"></div>
-      </div>
-      
-      <div class="question">
-        <h3>3. ¿Qué fase de la autorregulación implica implementar las estrategias planificadas?</h3>
-        <label><input type="radio" name="q3" value="incorrect"> Planificación</label>
-        <label><input type="radio" name="q3" value="correct"> Ejecución o desempeño</label>
-        <label><input type="radio" name="q3" value="incorrect"> Autorreflexión</label>
-        <div class="feedback" id="feedback3"></div>
-      </div>
-      
-      <div class="question">
-        <h3>4. ¿Qué estrategia fomenta la metacognición?</h3>
-        <label><input type="radio" name="q4" value="correct"> Uso de diarios de aprendizaje para reflexionar sobre estrategias y resultados.</label>
-        <label><input type="radio" name="q4" value="incorrect"> Repetición mecánica de ejercicios.</label>
-        <label><input type="radio" name="q4" value="incorrect"> Aprender sin autoevaluarse.</label>
-        <div class="feedback" id="feedback4"></div>
-      </div>
-      
-      <div class="question">
-        <h3>5. ¿Por qué son importantes la metacognición y la autorregulación en la educación técnica?</h3>
-        <label><input type="radio" name="q5" value="incorrect"> Porque permiten aprender solo de memoria.</label>
-        <label><input type="radio" name="q5" value="correct"> Porque ayudan a adaptarse a nuevos lenguajes y herramientas tecnológicas.</label>
-        <label><input type="radio" name="q5" value="incorrect"> Porque reemplazan el rol del docente.</label>
-        <div class="feedback" id="feedback5"></div>
-      </div>
+      <!-- P1 -->
+<div class="q" data-correct="b" data-explain="La metacognición implica reflexionar sobre los propios procesos de pensamiento y aprendizaje.">
+  <h3>1) ¿Qué describe mejor el concepto de metacognición?</h3>
+  <div class="opts">
+    <label class="opt"><input type="radio" name="q1" value="a"> Memorizar datos sin comprensión.</label>
+    <label class="opt"><input type="radio" name="q1" value="b"> Reflexionar sobre los propios procesos de pensamiento y aprendizaje.</label>
+    <label class="opt"><input type="radio" name="q1" value="c"> Realizar actividades mecánicas sin planificación.</label>
+    <label class="opt"><input type="radio" name="q1" value="d"> Seguir instrucciones sin autonomía.</label>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P2 -->
+<div class="q" data-correct="c" data-explain="El conocimiento condicional es saber cuándo y por qué aplicar una estrategia específica.">
+  <h3>2) ¿Qué es el conocimiento condicional?</h3>
+  <div class="opts">
+    <label class="opt"><input type="radio" name="q2" value="a"> Saber cómo aplicar una estrategia.</label>
+    <label class="opt"><input type="radio" name="q2" value="b"> Conocer solo las debilidades cognitivas.</label>
+    <label class="opt"><input type="radio" name="q2" value="c"> Saber cuándo y por qué aplicar una estrategia.</label>
+    <label class="opt"><input type="radio" name="q2" value="d"> Memorizar contenido sin reflexionar.</label>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P3 -->
+<div class="q" data-correct="a" data-explain="La fase de planificación implica establecer metas, seleccionar estrategias y organizar recursos.">
+  <h3>3) ¿Qué se realiza en la fase de planificación del aprendizaje autorregulado?</h3>
+  <div class="opts">
+    <label class="opt"><input type="radio" name="q3" value="a"> Establecer metas, elegir estrategias y organizar recursos.</label>
+    <label class="opt"><input type="radio" name="q3" value="b"> Ejecutar tareas sin preparación.</label>
+    <label class="opt"><input type="radio" name="q3" value="c"> Evaluar el desempeño final.</label>
+    <label class="opt"><input type="radio" name="q3" value="d"> Esperar instrucciones externas.</label>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P4 -->
+<div class="q" data-correct="d" data-explain="La fase de autorreflexión consiste en evaluar resultados, identificar dificultades y planificar mejoras.">
+  <h3>4) ¿Cuál acción corresponde a la fase de autorreflexión?</h3>
+  <div class="opts">
+    <label class="opt"><input type="radio" name="q4" value="a"> Establecer metas para una nueva unidad.</label>
+    <label class="opt"><input type="radio" name="q4" value="b"> Memorizar información sin análisis.</label>
+    <label class="opt"><input type="radio" name="q4" value="c"> Ejecutar estrategias sin supervisión.</label>
+    <label class="opt"><input type="radio" name="q4" value="d"> Evaluar resultados y planear mejoras.</label>
+  </div>
+  <div class="feedback"></div>
+</div>
+
+<!-- P5 -->
+<div class="q" data-correct="b" data-explain="El uso de bitácoras permite reflexionar sobre el aprendizaje, identificar aciertos y áreas de mejora.">
+  <h3>5) ¿Cuál estrategia fomenta la metacognición?</h3>
+  <div class="opts">
+    <label class="opt"><input type="radio" name="q5" value="a"> Repetir sin entender.</label>
+    <label class="opt"><input type="radio" name="q5" value="b"> Escribir bitácoras de aprendizaje y reflexionar sobre lo aprendido.</label>
+    <label class="opt"><input type="radio" name="q5" value="c"> Memorizar listas sin relación entre conceptos.</label>
+    <label class="opt"><input type="radio" name="q5" value="d"> Realizar tareas sin planificación.</label>
+  </div>
+  <div class="feedback"></div>
+</div>
       
       <button type="button" id="btnEnviar">Enviar respuestas</button>
     </form>
     
     <div id="result"></div>
+
+
   </div>
 
   <script>
