@@ -1,185 +1,159 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Quiz: Metacognición y Autorregulación</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Metacognición y Autorregulación</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f9;
+      font-family: system-ui, sans-serif;
+      background: #f9fafb;
       margin: 0;
       padding: 20px;
+      color: #1f2937;
     }
-    .container {
-      max-width: 800px;
+
+    .quiz {
+      max-width: 900px;
       margin: auto;
+      display: grid;
+      gap: 24px;
+    }
+
+    .q {
       background: #fff;
-      padding: 25px;
+      border: 1px solid #e5e7eb;
       border-radius: 12px;
-      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
     }
-    h1 {
-      text-align: center;
-      color: #2c3e50;
+
+    .q h3 {
+      margin-top: 0;
     }
-    .question {
-      margin-bottom: 20px;
-    }
-    .question h3 {
-      color: #34495e;
-    }
-    label {
+
+    .opt {
       display: block;
-      padding: 8px;
-      background: #ecf0f1;
-      margin: 6px 0;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    label:hover {
-      background: #dfe6e9;
-    }
-    button {
-      display: block;
-      margin: 20px auto;
-      padding: 12px 25px;
-      border: none;
-      background: #27ae60;
-      color: white;
+      margin: 8px 0;
+      padding: 10px;
+      border: 1px solid #d1d5db;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 16px;
-      transition: background 0.3s;
+      transition: 0.2s;
     }
-    button:hover {
-      background: #219150;
+
+    .opt:hover {
+      background: #f3f4f6;
     }
+
+    input[type="radio"] {
+      display: none;
+    }
+
     .feedback {
+      display: none;
+      padding: 12px;
       margin-top: 10px;
-      font-weight: bold;
+      border-radius: 8px;
+      font-size: 14px;
     }
-    .correct {
-      color: green;
+
+    .ok {
+      background: #dcfce7;
+      border: 1px solid #86efac;
+      color: #166534;
     }
-    .incorrect {
-      color: red;
+
+    .bad {
+      background: #fee2e2;
+      border: 1px solid #fca5a5;
+      color: #991b1b;
     }
-    .not-answered {
-      color: orange;
+
+    /* Mostrar feedback cuando se selecciona una opción específica */
+    input[value="b"]:checked ~ .feedback.ok-b,
+    input[value="c"]:checked ~ .feedback.ok-c,
+    input[value="a"]:checked ~ .feedback.ok-a,
+    input[value="d"]:checked ~ .feedback.ok-d {
+      display: block;
     }
-    #result {
-      text-align: center;
-      margin-top: 25px;
-      font-size: 20px;
-      font-weight: bold;
-      color: #2c3e50;
+
+    input:not([value="b"]):checked ~ .feedback.bad-b,
+    input:not([value="c"]):checked ~ .feedback.bad-c,
+    input:not([value="a"]):checked ~ .feedback.bad-a,
+    input:not([value="d"]):checked ~ .feedback.bad-d {
+      display: block;
     }
   </style>
 </head>
 <body>
-  <div class="container">
 
-    <h1>Quiz: Metacognición y Autorregulación</h1>
-    <form id="quizForm" onsubmit="return false;">
-      
-      <!-- P1 -->
-<div class="q" data-correct="b" data-explain="La metacognición implica reflexionar sobre los propios procesos de pensamiento y aprendizaje.">
-  <h3>1) ¿Qué describe mejor el concepto de metacognición?</h3>
-  <div class="opts">
+<div class="quiz">
+
+  <!-- P1 -->
+  <div class="q">
+    <h3>1) ¿Qué describe mejor el concepto de metacognición?</h3>
     <label class="opt"><input type="radio" name="q1" value="a"> Memorizar datos sin comprensión.</label>
     <label class="opt"><input type="radio" name="q1" value="b"> Reflexionar sobre los propios procesos de pensamiento y aprendizaje.</label>
     <label class="opt"><input type="radio" name="q1" value="c"> Realizar actividades mecánicas sin planificación.</label>
     <label class="opt"><input type="radio" name="q1" value="d"> Seguir instrucciones sin autonomía.</label>
+    <input type="radio" name="q1" value="b" />
+    <div class="feedback ok ok-b">✅ ¡Correcto! Implica pensar sobre cómo se piensa y aprende.</div>
+    <input type="radio" name="q1" value="a" />
+    <div class="feedback bad bad-b">❌ Incorrecto. Memorizar no es reflexionar.</div>
   </div>
-  <div class="feedback"></div>
-</div>
 
-<!-- P2 -->
-<div class="q" data-correct="c" data-explain="El conocimiento condicional es saber cuándo y por qué aplicar una estrategia específica.">
-  <h3>2) ¿Qué es el conocimiento condicional?</h3>
-  <div class="opts">
+  <!-- P2 -->
+  <div class="q">
+    <h3>2) ¿Qué es el conocimiento condicional?</h3>
     <label class="opt"><input type="radio" name="q2" value="a"> Saber cómo aplicar una estrategia.</label>
     <label class="opt"><input type="radio" name="q2" value="b"> Conocer solo las debilidades cognitivas.</label>
     <label class="opt"><input type="radio" name="q2" value="c"> Saber cuándo y por qué aplicar una estrategia.</label>
     <label class="opt"><input type="radio" name="q2" value="d"> Memorizar contenido sin reflexionar.</label>
+    <input type="radio" name="q2" value="c" />
+    <div class="feedback ok ok-c">✅ ¡Correcto! Es el conocimiento de cuándo y por qué usar estrategias.</div>
+    <input type="radio" name="q2" value="a" />
+    <div class="feedback bad bad-c">❌ Incorrecto. Eso corresponde al conocimiento procedimental.</div>
   </div>
-  <div class="feedback"></div>
-</div>
 
-<!-- P3 -->
-<div class="q" data-correct="a" data-explain="La fase de planificación implica establecer metas, seleccionar estrategias y organizar recursos.">
-  <h3>3) ¿Qué se realiza en la fase de planificación del aprendizaje autorregulado?</h3>
-  <div class="opts">
+  <!-- P3 -->
+  <div class="q">
+    <h3>3) ¿Qué se realiza en la fase de planificación del aprendizaje autorregulado?</h3>
     <label class="opt"><input type="radio" name="q3" value="a"> Establecer metas, elegir estrategias y organizar recursos.</label>
     <label class="opt"><input type="radio" name="q3" value="b"> Ejecutar tareas sin preparación.</label>
     <label class="opt"><input type="radio" name="q3" value="c"> Evaluar el desempeño final.</label>
     <label class="opt"><input type="radio" name="q3" value="d"> Esperar instrucciones externas.</label>
+    <input type="radio" name="q3" value="a" />
+    <div class="feedback ok ok-a">✅ ¡Correcto! Esa es la fase de planificación.</div>
+    <input type="radio" name="q3" value="b" />
+    <div class="feedback bad bad-a">❌ Incorrecto. La fase de planificación implica preparación anticipada.</div>
   </div>
-  <div class="feedback"></div>
-</div>
 
-<!-- P4 -->
-<div class="q" data-correct="d" data-explain="La fase de autorreflexión consiste en evaluar resultados, identificar dificultades y planificar mejoras.">
-  <h3>4) ¿Cuál acción corresponde a la fase de autorreflexión?</h3>
-  <div class="opts">
+  <!-- P4 -->
+  <div class="q">
+    <h3>4) ¿Cuál acción corresponde a la fase de autorreflexión?</h3>
     <label class="opt"><input type="radio" name="q4" value="a"> Establecer metas para una nueva unidad.</label>
     <label class="opt"><input type="radio" name="q4" value="b"> Memorizar información sin análisis.</label>
     <label class="opt"><input type="radio" name="q4" value="c"> Ejecutar estrategias sin supervisión.</label>
     <label class="opt"><input type="radio" name="q4" value="d"> Evaluar resultados y planear mejoras.</label>
+    <input type="radio" name="q4" value="d" />
+    <div class="feedback ok ok-d">✅ ¡Correcto! Evaluar y mejorar es parte de la autorreflexión.</div>
+    <input type="radio" name="q4" value="a" />
+    <div class="feedback bad bad-d">❌ Incorrecto. Esa acción ocurre en la planificación.</div>
   </div>
-  <div class="feedback"></div>
-</div>
 
-<!-- P5 -->
-<div class="q" data-correct="b" data-explain="El uso de bitácoras permite reflexionar sobre el aprendizaje, identificar aciertos y áreas de mejora.">
-  <h3>5) ¿Cuál estrategia fomenta la metacognición?</h3>
-  <div class="opts">
+  <!-- P5 -->
+  <div class="q">
+    <h3>5) ¿Cuál estrategia fomenta la metacognición?</h3>
     <label class="opt"><input type="radio" name="q5" value="a"> Repetir sin entender.</label>
     <label class="opt"><input type="radio" name="q5" value="b"> Escribir bitácoras de aprendizaje y reflexionar sobre lo aprendido.</label>
     <label class="opt"><input type="radio" name="q5" value="c"> Memorizar listas sin relación entre conceptos.</label>
     <label class="opt"><input type="radio" name="q5" value="d"> Realizar tareas sin planificación.</label>
+    <input type="radio" name="q5" value="b" />
+    <div class="feedback ok ok-b">✅ ¡Correcto! Las bitácoras ayudan a reflexionar sobre el proceso de aprendizaje.</div>
+    <input type="radio" name="q5" value="a" />
+    <div class="feedback bad bad-b">❌ Incorrecto. Repetir sin reflexión no favorece la metacognición.</div>
   </div>
-  <div class="feedback"></div>
+
 </div>
-      
-      <button type="button" id="btnEnviar">Enviar respuestas</button>
-    </form>
-    
-    <div id="result"></div>
-
-
-  </div>
-
-  <script>
-    document.getElementById("btnEnviar").addEventListener("click", checkAnswers);
-
-    function checkAnswers() {
-      let total = 5;
-      let score = 0;
-
-      for (let i = 1; i <= total; i++) {
-        let selected = document.querySelector(`input[name="q${i}"]:checked`);
-        let feedback = document.getElementById(`feedback${i}`);
-
-        if (selected) {
-          if (selected.value === "correct") {
-            score++;
-            feedback.textContent = "✅ ¡Correcto!";
-            feedback.className = "feedback correct";
-          } else {
-            feedback.textContent = "❌ Incorrecto. Revisa el contenido.";
-            feedback.className = "feedback incorrect";
-          }
-        } else {
-          feedback.textContent = "⚠️ No respondiste esta pregunta.";
-          feedback.className = "feedback not-answered";
-        }
-      }
-
-      let result = document.getElementById("result");
-      result.textContent = `Tu calificación final es: ${score} / ${total}`;
-    }
-  </script>
 </body>
 </html>
